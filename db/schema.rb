@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20131218104601) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
     t.string   "last_name"
     t.string   "provider"
     t.string   "uid"
-    t.string   "username"
     t.string   "authentification_token"
   end
 

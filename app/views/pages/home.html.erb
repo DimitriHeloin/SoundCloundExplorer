@@ -1,2 +1,5 @@
-<h1>Hello Pages Home</h1>
-<p>Welcome </p>
+<%if current_user%>
+<%if @soundcloud_account%>
+<%= @soundcloud_account.followers_count%>
+<%end%>
+<%end%>

@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
                       password: pass,
                       password_confirmation: pass,
                       authentification_token: hash["credentials"]["token"])
-
+        
       user.save
 
     end
