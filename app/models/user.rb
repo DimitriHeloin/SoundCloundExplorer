@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
       user = User.new(provider: hash["provider"],
                       uid: hash["uid"],
-                      email: hash["info"]["email"],
+                      username: hash["extra"]["raw_info"]["username"],
                       password: pass,
                       password_confirmation: pass)
 
@@ -26,6 +26,14 @@ class User < ActiveRecord::Base
   def admin?
     # false
     true
+  end
+  
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
   end
 
 end

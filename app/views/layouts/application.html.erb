@@ -13,7 +13,7 @@
 <a href="/" class="btn btn-primary">Back Home here</a>
 
 <% if current_user %>
-    <%= current_user.email %>
+    <%= current_user.username %>
 
     <% if current_user.admin? %>
         <span class="label label-success">Admin</span>
