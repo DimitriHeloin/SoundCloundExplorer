@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deviseconnect</title>
+
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.min.css">
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<a href="/" class="btn btn-primary">Back Home here</a>
+
+<% if current_user %>
+    <%= current_user.email %>
+
+    <% if current_user.admin? %>
+        <span class="label label-success">Admin</span>
+    <% else %>
+        <span class="label label-warning">not Admin</span>
+    <% end %>
+
+    <%= form_tag destroy_user_session_path, method: :delete do %>
+
+        <button type="submit" class="btn btn-danger">Déconnexion</button>
+    <% end %>
+<% else %>
+    <%= link_to "Connexion", new_user_session_path, class: "btn btn-success" %>
+    <%= link_to "Connect SoundCloud", "/auth/soundcloud", class: "btn btn-primary" %>
+<% end %>
+
+
+<div class="container">
+  <%= yield %>
+</div>
+
+</body>
+</html>
