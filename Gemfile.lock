@@ -165,6 +165,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 1.2)
   jquery-rails
+  json
   omniauth-soundcloud
   rails (= 4.0.1)
   sass-rails (~> 4.0.0)
