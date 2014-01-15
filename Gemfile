@@ -7,6 +7,7 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'd3_rails'
 gem 'json'
+gem 'pry'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -43,7 +43,7 @@
         var width = 400,
                 height = 400,
                 root;
-
+        var jsonJavascript;
         var force = d3.layout.force()
                 .size([width, height])
                 .on("tick", tick);
@@ -55,10 +55,10 @@
         var link = svg.selectAll(".link"),
                 node = svg.selectAll(".node");
 
-        d3.json("event.json", function(json) {
-            root = json;
+        
+            root = <%=raw '{"name": "Moi", "children":'%><%=raw @soundcloud_account%><%= raw  '}'%>;
             update();
-        });
+       
 
         function update() {
             var nodes = flatten(root),
@@ -100,7 +100,6 @@
                     .on("click", click)
                     .call(force.drag);
 
-                    console.log("blabla"+node.size());
         }
 
         function tick() {
@@ -132,7 +131,7 @@
 
                 update();
             }
-            console.log("tu as clicked : "+d.username);
+            
             document.getElementById("name").innerHTML=d.username; 
                         document.getElementById("following").innerHTML="Nombre de personnes qu'il suit :"+d.followings_count; 
 
@@ -142,48 +141,30 @@
 
 
 
-            <% @nod=Node.new %>
-            
-    //     $.ajax({
-    //              url: "nodes/"+39+"/set_id", // Route to the Script Controller method
-    //             type: "post",
-    //             data: d.id, // This goes to Controller in params hash, i.e. params[:file_name]
-    //         complete: function(
-    //             <% @nod.save%>
-            
-    //         ) {},
-    //          success: function(data, textStatus, xhr) {
-    //                     // Do something with the response here
-    //                      // Show the file contents in our editor.
-    //                                                        // editor is defined somewhere above 
-    //                                                        // 'file_content' is the key we use to respond
-    //                                                        // in the controller function below
-    //                   },
-    //            error: function() {
-    //                     alert("Ajax error!")
-    //                   }
-    // });
-            
-            
+
+        $.ajax({
+                 url: "/followings", // Route to the Script Controller method
+                type: "GET",
+                dataType: "json",
+                data: { id_donne: d.id}, // This goes to Controller in params hash, i.e. params[:file_name]
+            complete: function(
+            ) {},
+             success: function(data, textStatus, xhr) {console.log("le mec cliqué suit:");console.log(data);
+             console.log("root");
+             console.log(root);
+                      },
+               error: function() {
+                        alert("Ajax error!")
+                      }
+    }); 
+
+    for(int i=0;i<root.length;i++)
+    {
+        console.log(i);
+    } 
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    console.log("clicked : "+d.username);     
 
          }   
         }

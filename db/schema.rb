@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115003722) do
+ActiveRecord::Schema.define(version: 20140115083858) do
+
+  create_table "followings", force: true do |t|
+    t.integer  "id_soundcloud"
+    t.string   "username"
+    t.integer  "followings_count"
+    t.integer  "followers_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "nodes", force: true do |t|
     t.integer  "id_soundcloud"

@@ -5,21 +5,8 @@ Deviseomn::Application.routes.draw do
   get '/auth/:provider/callback', to: 'pages#create_soundcloud'
   get 'auth/:provider/back', to: 'pages#create_client'
 
-  get 'patient_record/expand'
-  post 'nodes/set_id'
-    get 'nodes/get_id'
 
 
-resources :nodes do
+resources :followings,  only: [:index]
 
-    member do
-        post 'set_id'
-    end
-end
-resources :nodes do
-
-    member do
-        get 'get_id'
-    end
-end
 end
