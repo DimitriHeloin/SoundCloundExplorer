@@ -1,0 +1,35 @@
+
+
+#value{
+	width:400px;
+	height:400px;
+	background-color: #ff7700
+;
+	border-radius: 8px;
+	margin-top: 50px;
+	padding-left: 30px;
+	padding-top: 30px;
+
+	 }
+#schema{
+	width:400px;
+	height:400px;
+	position: absolute;
+	top:50px;
+	left:480px;
+	float:left;
+	border-radius: 8px;
+	border: 5px solid #ff7700
+;
+}
+
+#image{
+	width:200px;
+	height:200px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+#show
+{
+	
+}

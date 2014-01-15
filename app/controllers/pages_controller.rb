@@ -1,9 +1,11 @@
 class PagesController < ApplicationController
   def home
+  
+
   	if current_user
     	@client=Soundcloud.new(:access_token => current_user.authentification_token)
   		@soundcloud_account=@client.get("/me/followings").to_json
-      @soundcloud_search = @client.get('/users', :q => 'Rat Cheum').to_json
+       @soundclound_target=@soundcloud_account
 
     data = ActiveSupport::JSON.decode(@soundcloud_account)
 
@@ -41,10 +43,26 @@ class PagesController < ApplicationController
     omniauth = request.env['omniauth.auth']
     user = User.get_or_create_from_omniauth(omniauth)
     sign_in user
-    redirect_to root_path
-
-   
+    redirect_to root_path 
   end
 
+
+  def expandNew(id)
+    @soundclound_target=@client.get('/users/'+id.to_s).to_json
+
+      @soundcloud_test = @client.get("/users/#{id}/followings/").to_json
+      File.open("public/event.json","a") do |f|
+        f << '{
+            "name": "flare",
+            "children": '
+        f.write(@soundcloud_test)
+        f << "}"
+     end
+      File.open("public/event.json","a") do |f|
+        f << "}"
+      end
+    end
+
+  
 
 end

@@ -5,19 +5,17 @@
 
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="application.css">
 
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<div id="logs">
 <a href="/" class="btn btn-primary">Back Home here</a>
 
 <% if current_user %>
-    <% if current_user.admin? %>
-        <span class="label label-success">Admin</span>
-    <% else %>
-        <span class="label label-warning">not Admin</span>
-    <% end %>
+    
 
     <%= form_tag destroy_user_session_path, method: :delete do %>
 
@@ -27,7 +25,7 @@
     <%= link_to "Connexion", new_user_session_path, class: "btn btn-success" %>
     <%= link_to "Connect SoundCloud", "/auth/soundcloud", class: "btn btn-primary" %>
 <% end %>
-
+</div>
 
 <div class="container">
   <%= yield %>
