@@ -29,17 +29,32 @@
     <div id="value">
         <div id="name"></div>
         <div id="image"></div>
+        <div id="description"></div>
         <div id="followers"></div>
         <div id="following"></div>
     </div>
+ <div id="schema"></div>
+    <div id="value2">
+        <div id="name2"></div>
+        <div id="image2"></div>
+                <div id="description2"></div>
+
+        <div id="followers2"></div>
+        <div id="following2"></div>
+    </div>
 
 
-    <div id="schema"></div>
+   
     </div>
 <p></p>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script>
-
+    var nodeSelected;
+var tooltip = d3.select("body")
+                .append("div")
+                .style("position", "absolute")
+                .style("z-index", "10")
+                .style("visibility", "hidden");
         var width = 400,
                 height = 400,
                 root;
@@ -98,7 +113,13 @@
                     .attr("r", function(d) { return Math.sqrt(d.size) / 10 || 4.5; })
                     .style("fill", color)
                     .on("click", click)
-                    .call(force.drag);
+                    .call(force.drag)
+                   .on("mouseover", function(d){
+                           preview(d)});
+                        
+                    
+
+
 
         }
 
@@ -117,26 +138,34 @@
             return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
         }
 
+        function functionOver()
+        {
+            console.log("test");
+        }
+
         // Toggle children on click.
         function click(d) {
+            nodeSelected=d;
+            var trouve=false;
             var url = '/pages/expandNew';
             if (!d3.event.defaultPrevented) {
-                if (d.children) {
-                    d._children = d.children;
-                    d.children = null;
-                } else {
-                    d.children = d._children;
-                    d._children = null;
+            //     if (d.children) {
+            //         d._children = d.children;
+            //         d.children = null;
+            //     } else {
+            //         d.children = d._children;
+            //         d._children = null;
 
 
-                update();
-            }
+            //     update();
+            // }
             
             document.getElementById("name").innerHTML=d.username; 
-                        document.getElementById("following").innerHTML="Nombre de personnes qu'il suit :"+d.followings_count; 
+            document.getElementById("description").innerHTML=d.description; 
 
+            document.getElementById("following").innerHTML="Nombre de personnes qu'il suit :"+d.followings_count; 
             document.getElementById("followers").innerHTML="Nombre de personnes qui le suivent :"+d.followers_count; 
-                $('#image').css("background-image","url("+d.avatar_url+")");
+            $('#image').css("background-image","url("+d.avatar_url+")");
 
 
 
@@ -152,21 +181,63 @@
              success: function(data, textStatus, xhr) {console.log("le mec cliqué suit:");console.log(data);
              console.log("root");
              console.log(root);
+             
+
+for(i=0;i<root["children"].length;i++)
+    {
+        if (root["children"][i].id==d.id) {
+            trouve=true;
+            console.log("omg trouve :"+i);
+            root["children"][i].children=data["children"];
+            update();
+        }
+
+    }
+
+    if(trouve==false)
+    {
+     console.log("c'est false");   
+
+     for(i=0;i<root["children"].length;i++)
+    {
+        if(root["children"][i]["children"]){
+          for(j=0;j<root["children"][i]["children"].length;j++)
+        
+      {
+        if (root["children"][i]["children"][j].id==d.id) {
+            trouve=true;
+            console.log("omg trouve :"+i+"/"+j);
+            root["children"][i]["children"][j].children=data["children"];
+            update();
+        }
+    }
+}
+
+    }
+}
+
+
                       },
                error: function() {
                         alert("Ajax error!")
                       }
     }); 
 
-    for(int i=0;i<root.length;i++)
-    {
-        console.log(i);
-    } 
+     
 
 
     console.log("clicked : "+d.username);     
 
          }   
+        }
+        function preview(d)
+        {
+ document.getElementById("name2").innerHTML=d.username; 
+             document.getElementById("description2").innerHTML=d.description; 
+
+            document.getElementById("following2").innerHTML="Nombre de personnes qu'il suit :"+d.followings_count; 
+            document.getElementById("followers2").innerHTML="Nombre de personnes qui le suivent :"+d.followers_count; 
+            $('#image2').css("background-image","url("+d.avatar_url+")");
         }
 
         // Returns a list of all nodes under the root.

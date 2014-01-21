@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-  <title>Deviseconnect</title>
+  <title>SoundCloud-Viz</title>
 
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap-theme.min.css">
@@ -9,23 +9,63 @@
 
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="bs-docs-home">
 
-<div id="logs">
-<a href="/" class="btn btn-primary">Back Home here</a>
 
-<% if current_user %>
-    
 
-    <%= form_tag destroy_user_session_path, method: :delete do %>
+  <a class="sr-only" href="#content">Skip to main content</a>
+  <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="./" class="navbar-brand">SounCloud DataViz</a>
+      </div>
+      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/">Home</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+         <li>
+           <% if current_user %>
+               <%= form_tag destroy_user_session_path, method: :delete do %>
+                   <p class="navbar-text">Signed in as <%= current_user.username%></p>
+                   <button type="submit" class="btn btn-default navbar-btn">Déconnexion</button>
+               <% end %>
+           <% else %>
+               <%= link_to "Connect SoundCloud", "/auth/soundcloud", class:"btn btn-default navbar-btn" %>
+           <% end %>
+         </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-        <button type="submit" class="btn btn-danger">Déconnexion</button>
-    <% end %>
-<% else %>
-    <%= link_to "Connexion", new_user_session_path, class: "btn btn-success" %>
-    <%= link_to "Connect SoundCloud", "/auth/soundcloud", class: "btn btn-primary" %>
-<% end %>
-</div>
+
+  <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <a href="/" class="btn btn-default navbar-btn">Home</a>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+                <%= form_tag destroy_user_session_path, method: :delete do %>
+                <p class="navbar-text">Signed in as <%= current_user.username%></p>
+                <button type="submit" class="btn btn-danger">Déconnexion</button>
+                <% end %>
+            <% else %>
+                <%= link_to "Connect SoundCloud", "/auth/soundcloud", class:"btn btn-default" %>
+           <% end %>
+      </ul>
+    </div>
+  </nav>
+-->
+
+
 
 <div class="container">
   <%= yield %>

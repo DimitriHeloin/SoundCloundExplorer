@@ -1,4 +1,14 @@
 
+body{
+	position:relative;
+
+}
+#description{
+	font-size: 0.7em;
+}
+#description2{
+	font-size:0.7em;
+}
 
 #value{
 	width:400px;
@@ -6,18 +16,17 @@
 	background-color: #ff7700
 ;
 	border-radius: 8px;
-	margin-top: 50px;
-	padding-left: 30px;
-	padding-top: 30px;
+float: left;	position:relative;
+	padding-left: 15px;
+	padding-top: 15px;
 
 	 }
 #schema{
 	width:400px;
 	height:400px;
-	position: absolute;
-	top:50px;
-	left:480px;
-	float:left;
+float: left;
+	position:relative;
+
 	border-radius: 8px;
 	border: 5px solid #ff7700
 ;
@@ -29,7 +38,31 @@
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
+
+#value2{
+	width:400px;
+	height:400px;
+	background-color: #ff7700;
+	border-radius: 8px;
+float: right;
+	position:relative;
+	padding-left: 15px;
+	padding-top: 15px;
+
+
+	 }
+
+
+#image2{
+	width:200px;
+	height:200px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
 #show
 {
-	
+
+	margin-top:100px;
+	width: 1200px;
+	height:400px;
 }

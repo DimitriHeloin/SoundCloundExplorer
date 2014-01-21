@@ -12,18 +12,6 @@ class PagesController < ApplicationController
 
     end
 
-    
-
-      File.open("public/event.json","w") do |f|
-        f << '{
-            "name": "blabla",
-            "children": '
-        f.write(@soundcloud_account)
-        f << "}"
-      end
-
-
-
   end
 
 
