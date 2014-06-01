@@ -5,8 +5,11 @@ Deviseomn::Application.routes.draw do
   get '/auth/:provider/callback', to: 'pages#create_soundcloud'
   get 'auth/:provider/back', to: 'pages#create_client'
 
+get 'application/urltracks'
+get 'application/urllikes'
 
 
 resources :followings,  only: [:index]
 
 end
+
