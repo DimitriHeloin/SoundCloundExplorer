@@ -388,7 +388,6 @@ treeJSON = d3.json("", function(error) {
         update(d);
         centerNode(d);
 
-        var trouve=false;
                 document.getElementById("name").innerHTML=d.username; 
                 document.getElementById("description").innerHTML=d.description; 
 
@@ -396,7 +395,70 @@ treeJSON = d3.json("", function(error) {
                 document.getElementById("followers").innerHTML="Nombre de personnes qui le suivent :"+d.followers_count; 
                 $('#image').css("background-image","url("+d.avatar_url+")");
 
-                $.ajax({
+
+                if(!d.children){
+            $.ajax({
+                     url: "/followings", // Route to the Script Controller method
+                    type: "GET",
+                    dataType: "json",
+                    data: { id_donne: d.id}, // This goes to Controller in params hash, i.e. params[:file_name]
+                complete: function(
+
+                
+                ) {},
+                 success: function(data, textStatus, xhr) {
+                    var listNodes=flatten(root);            
+                    var listeId=[];
+                    var valeurEnTrop=[];
+                    listNodes.forEach(function(entry)
+                    {
+                        listeId.push(entry.id)
+
+                    });
+                    if(d.children==null&&d._children==null)
+                    {
+                        d.children=data["children"];
+                        for(var i=0;i<d.children.length;i++)
+                        {
+                            for(var j=0;j<listeId.length;j++)
+                            {
+                                if(d.children[i].id===listeId[j])
+                                {
+                                    valeurEnTrop.push(i);
+                                }
+                            }
+
+                            // listNodes.forEach(function(entry){ 
+                            //     if(d.children[i].id===entry.id)
+                            //     {
+                            //         d.children.splice(i, 1);
+                            //         update(entry);
+                            //     }
+                            //     });  
+                        }
+                        valeurEnTrop.reverse();
+                        for(var k=0;k<valeurEnTrop.length;k++)
+                        {
+                            d.children.splice(valeurEnTrop[k], 1);
+
+                        }
+
+
+
+                     update(d);
+
+                    }
+
+
+
+                          },
+                   error: function() {
+                            alert("Ajax error!")
+                          }
+            }); 
+        }
+
+                        $.ajax({
 
                      url: "/application/urllikes", // Route to the Script Controller method
                     type: "GET",
@@ -407,20 +469,18 @@ treeJSON = d3.json("", function(error) {
                 
                 ) {},
                  success: function(data, textStatus, xhr) {
-                    console.log(data);
                     $("#likes-list").empty();
                     for(var index =0;index<data["children"].length;index++)
-                {
+                             {
                             $('#likes-list').append('<li style="cursor:pointer;"  linkPlayer="'+data["children"][index].uri+'">'+data["children"][index].title+'</li>');
 
-                }
-        
-
-                 },
+                             }
+                        },
                     error: function() {
                             alert("Ajax error!")
                           }
         }); 
+
                 $.ajax({
 
                      url: "/application/urltracks", // Route to the Script Controller method
@@ -445,50 +505,11 @@ treeJSON = d3.json("", function(error) {
                     error: function() {
                             alert("Ajax error!")
                           }
-        }); 
-                 
+        });
 
 
 
-            $.ajax({
-                     url: "/followings", // Route to the Script Controller method
-                    type: "GET",
-                    dataType: "json",
-                    data: { id_donne: d.id}, // This goes to Controller in params hash, i.e. params[:file_name]
-                complete: function(
-
-                
-                ) {},
-                 success: function(data, textStatus, xhr) {
-                    var listNodes=flatten(root);
-
-                                if(d.children==null&&d._children==null)
-                                {
-                                d.children=data["children"];
-                                for(var i=0;i<d.children.length;i++)
-                                {
-                                    listNodes.forEach(function(entry){ 
-                                        if(d.children[i].id===entry.id)
-                                        {
-                                            d.children.splice(i, 1);
-                                            update(entry);
-                                        }
-                                        });  
-                                }
-                             update(d);
-
-                                }
-
-
-
-                          },
-                   error: function() {
-                            alert("Ajax error!")
-                          }
-        }); 
-
-
-
+    }
 
 function flatten(root) {
                 var nodes = [], i = 0;
@@ -502,12 +523,6 @@ function flatten(root) {
                 recurse(root);
                 return nodes;
             }
-
-
-
-
-
-    }
 
     function update(source) {
         // Compute the new height, function counts total children of root node and sets tree height accordingly.
