@@ -1,4 +1,4 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-  provider :soundcloud, 'c64e305d7cb97058d42256ffc2528d93', 'e0900245108f1c143ae7524638d5d49d'
+  provider :soundcloud, '2b605e5c6b5b72f835f8491be23c956e', '063f8ec6e877a623176f8cf03ca1c094'
 end
