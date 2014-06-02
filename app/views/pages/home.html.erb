@@ -14,7 +14,6 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
                
           <script src="//connect.soundcloud.com/sdk.js"></script>
-          <script src="http://w.soundcloud.com/player/api.js"></script>
         <%= javascript_include_tag "application" %>
       <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
          <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
@@ -100,8 +99,18 @@
                     });
 
              $(document).ready(function() {
+                $selectednode=null;
+                $rootNode=null;
+                $menuOuvert=false;
+                $premierClic=false;
+                var totalNodes = 0;
+                // variables for drag/drop
+                 $functionClick=null;
+                 $functionUpdate=null;
 
-                $menuOuvert=false;$premierClic=false;
+
+
+
                 $("#headeralakon").css("top","-52px");
                 $height=$(window).height();
                 $width=$(window).width();
@@ -136,6 +145,7 @@
                             $("#headeralakon").animate({top:"0px"},250);
                             $("#buttonShowNav").animate({top:"52px"},250);
                             $menuOuvert=true;
+                                 
                         }
                         else
                         {
@@ -143,6 +153,8 @@
                               $("#buttonShowNav").animate({top:"0px"},250);
 
                             $menuOuvert=false;
+                                 
+            
                         }
 
                     });
@@ -150,13 +162,75 @@
                     $("#followbutton").click(function(){
                         if($(this).html()=="Follow")
                         {
+                        $(this).removeClass('btn-default');
+                        $(this).addClass('btn-warning');
+                        $(this).html('Following');
+                        $.ajax({
 
+                                 url: "/application/ajouteFollow", // Route to the Script Controller method
+                                type: "GET",
+                                dataType: "json",
+                                data: { id_donne: $(this).attr("idToFollow")}, // This goes to Controller in params hash, i.e. params[:file_name]
+                            complete: function(
+
+                            
+                            ) {},
+                             success: function(data, textStatus, xhr) {
+                var index = $selectednode.parent.children.indexOf($selectednode);
+                if (index > -1) {
+                    $selectednode.parent.children.splice(index, 1);
+                }
+                     $rootNode[$rootNode.length-1].children.push($selectednode);
+                    $functionClick($selectednode);
+                    $functionClick($selectednode);
+                    $("#followbutton").removeClass('btn-default');
+                    $("#followbutton").addClass('btn-warning');
+                    $("#followbutton").html('Following');
+           setTimeout(function(){$functionUpdate($selectednode)
+},750);
+                // Make sure that the node being added to is expanded so user can see added node is correctly moved
+                                    },
+                                error: function() {
+                                        alert("Ajax error!")
+                                      }
+                                     }); 
                         }
                         else
                         {
+                    $(this).addClass('btn-default');
+                    $(this).removeClass('btn-warning');
+                    $(this).html('Follow');
+                    $.ajax({
 
-                        }
-                        console.log();
+                                 url: "/application/deleteFollow", // Route to the Script Controller method
+                                type: "GET",
+                                dataType: "json",
+                                data: { id_donne:  $(this).attr("idToFollow")}, // This goes to Controller in params hash, i.e. params[:file_name]
+                            complete: function(
+
+                            
+                            ) {},
+                             success: function(data, textStatus, xhr) {
+                        var index = $selectednode.parent.children.indexOf($selectednode);
+                     if (index > -1) {
+                    $selectednode.parent.children.splice(index, 1);
+                    }
+                    $functionClick($rootNode[$rootNode.length-1]);
+                    $functionClick($rootNode[$rootNode.length-1]);
+                    setTimeout(function(){$functionUpdate($rootNode[$rootNode.length-1])
+},750);
+
+                    $("#followbutton").removeClass('btn-default');
+                    $("#followbutton").addClass('btn-warning');
+                    $("#followbutton").html('');                                //$myJson["children"]=data;
+               
+
+                                    },
+                                error: function() {
+                                        alert("Ajax error!")
+                                      }
+                                     }); 
+                 }
                     });
 
     //Ici on met les infos du mec qui s'enregistre
@@ -181,7 +255,6 @@
                     
                     ) {},
                      success: function(data, textStatus, xhr) {
-                        console.log(data);
                         $("#track-list").empty();
                         for(var index =0;index<data["children"].length;index++)
                     {
@@ -236,7 +309,15 @@
         // Calculate total nodes, max label length
         var totalNodes = 0;
         var maxLabelLength = 0;
-
+        $functionUpdate=update;
+        $functionExpand=expand;
+        $functionCollapse=collapse;
+        $functionPan=pan;
+        $functionSortTree=sortTree;
+        $functionClick=click;
+        $functionZoom=zoom;
+        $functionToggleChildren=toggleChildren;
+        $functionCenterNode=centerNode;
         // panning variables
         var panSpeed = 200;
         var panBoundary = 20; // Within 20px from edges will pan when dragging.
@@ -244,7 +325,7 @@
         var i = 0;
         var duration = 750;
         var root=$myJson;
-
+        $rootNode=flatten(root);
         // size of the diagram
         var viewerWidth = $("#tree-container").width();
         var viewerHeight = $("#tree-container").height();
@@ -364,11 +445,11 @@
         }
 
         var overCircle = function(d) {
-            selectedNode = d;
+            $selectednode = d;
             updateTempConnector();
         };
         var outCircle = function(d) {
-            selectedNode = null;
+            $selectednode = null;
             updateTempConnector();
         };
 
@@ -413,7 +494,8 @@
         // Toggle children on click.
 
         function click(d) {
-            if (d3.event.defaultPrevented) return; // click suppressed
+            $selectednode=d;
+            //if (d3.event.defaultPrevented) return; // click suppressed
             if($premierClic==false)
             {
             $("#follow").fadeIn("fast");
@@ -474,6 +556,13 @@
                         var valeurEnTrop=[];
                         listNodes.forEach(function(entry)
                         {
+                            if(!$rootNode)
+                            {
+                                if(entry.id==<%=@client.get('/me').id%>)
+                                {
+                                    $rootNode=entry;
+                                }
+                            }
                             listeId.push(entry.id)
 
                         });
@@ -554,7 +643,6 @@
                     
                     ) {},
                      success: function(data, textStatus, xhr) {
-                        console.log(data);
                         $("#track-list").empty();
                         for(var index =0;index<data["children"].length;index++)
                     {
@@ -573,7 +661,7 @@
 
         }
 
-    function flatten(root) {
+   function flatten(root) {
                     var nodes = [], i = 0;
 
                     function recurse(node) {
@@ -771,5 +859,6 @@
         centerNode(root);
     });
     </script>
+          <script src="http://w.soundcloud.com/player/api.js"></script>
 
         <%end%>

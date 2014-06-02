@@ -7,7 +7,8 @@ Deviseomn::Application.routes.draw do
 
 get 'application/urltracks'
 get 'application/urllikes'
-
+get 'application/ajouteFollow'
+get 'application/deleteFollow'
 
 resources :followings,  only: [:index]
 

@@ -24,17 +24,7 @@ class PagesController < ApplicationController
     redirect_to root_path 
   end
 
-  def update_list
-        if current_user
 
-       @client=Soundcloud.new(:access_token => current_user.authentification_token)
-      page_size=10000
-      @list_followings=@client.get("/me/followings",:limit=>page_size).to_json
-       @soundclound_target=@list_followings
-
-    data = ActiveSupport::JSON.decode(@list_followings)
-  end
-end
 
 
 

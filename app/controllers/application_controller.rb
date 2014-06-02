@@ -44,5 +44,45 @@ class ApplicationController < ActionController::Base
 
 
   end
+
+  def ajouteFollow
+      if params[:id_donne] 
+          if current_user
+           @client=Soundcloud.new(:access_token => current_user.authentification_token)
+           end
+
+            @client.put("/me/followings/#{params[:id_donne]}")
+            @newFollow=@client.get("/me/followings",:limit=>500)
+
+           
+             respond_to do |format|
+            format.html # show.html.erb
+            format.json  { render :json => {children:@newFollow} }
+
+            end
+
+            else
+        end      
+  end
+
+    def deleteFollow
+          if params[:id_donne] 
+              if current_user
+               @client=Soundcloud.new(:access_token => current_user.authentification_token)
+               end
+
+                @client.delete("/me/followings/#{params[:id_donne]}")
+                @newFollow=@client.get("/me/followings",:limit=>500)
+
+               
+                 respond_to do |format|
+                format.html # show.html.erb
+                format.json  { render :json => {children:@newFollow} }
+
+                end
+
+                else
+            end      
+      end  
   
 end
