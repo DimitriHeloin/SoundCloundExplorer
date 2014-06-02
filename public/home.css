@@ -1,7 +1,11 @@
+@media (min-width: 300px) {
+  
 #mainWindow{
 	position:relative;
 	width: 100%;
 	height: 100%;
+	background-color:#EEE;
+
 }
 #viewWindow{
 	position: relative;
@@ -35,10 +39,138 @@
 #value{
 	width:100%;
 	height:40%;
-	background-color: #ffffff;
+	background-color: white;
 	left: 0;
-	top: 50px;
+	position: relative;
 	 }
+
+#previewGuy{
+	position: relative;
+	width: 100%;
+	height: 70%;
+}
+#image{
+	position: relative;
+	float: left;
+		padding-left: 1%;
+		padding-top: 1%;
+	width:50%;
+	height:100%;
+	background-repeat: no-repeat;
+	background-size:contain;
+}
+#infos{
+	position: relative;
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+#username{
+	font-size: 1.3em;
+font-family: 'PT Serif', serif;
+	font-weight:bold;
+	width: 80%;
+	position: relative;
+	left: 10%;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	background-color: #EEE;
+}
+#full_name{
+	left: 10%;
+	font-size: 0.7em;
+	width: 80%;
+	position: relative;
+	left: 10%;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	background-color: #EEE;
+}
+#city{
+	left: 10%;
+	position: relative;
+
+}
+#country{
+	left: 10%;
+	position: relative;
+
+}
+#stats{
+	position: relative;
+	width: 100%;
+	height: 30%;
+	display: inline-block;
+}
+#followers{
+	height: 100%;
+	width: 20%;
+position: relative;
+float: left;
+padding-left: 30px;
+}
+#followers:before{
+ content: "";
+    background: url("followers.png") no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 80%;
+    position: absolute;
+    left: 5px;
+
+}
+#following{	
+	height: 100%;
+	width: 20%;
+position: relative;
+float: left;
+padding-left: 50px;
+}
+#following:before{
+ content: "";
+    background: url("following.png") no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 80%;
+    position: absolute;
+    left: 25px;
+
+}
+#tracksNumber{
+	height: 100%;
+	width: 20%;
+padding-left: 10px;
+position: relative;
+float: left;
+padding-left: 35px;
+
+}
+#tracksNumber:before{
+ content: "";
+    background: url("tracks.png") no-repeat;
+    background-size: 100%;
+    width: 20px;
+    height: 80%;
+    left: -2px;
+    position: absolute;
+s
+}
+
+#follow{
+	height: 100%;
+	width: 40%;
+	padding-left: 10px;
+position: relative;
+float: left;
+}
+
+#followbutton{
+	width: 70%;
+	height: 30%;
+	color: black;
+}
+
+
 
 
 
@@ -67,10 +199,10 @@
    
   .node circle {
     fill: #fff;
-    stroke: steelblue;
+    stroke: #FF9531;
     stroke-width: 1.5px;
   }
-   
+ 
   .node text {
     font-size:10px; 
     font-family:sans-serif;
@@ -103,22 +235,7 @@
     margin: 10px ;
 }
 
- 
-#image{
-	width:200px;
-	height:200px;
-	background-repeat: no-repeat;
-	background-size: 100%;
-}
 
-
-
-#description{
-	font-size: 0.7em;
-}
-#description2{
-	font-size:0.7em;
-}
 #tabs{
 	position: relative;
 
@@ -141,3 +258,17 @@
 	top: 10px;
 	z-index: 1000;
 }
+}
+@media (max-width: 300px)  {
+#mainWindow{
+	position:relative;
+	width: 100%;
+	height: 100%;
+	background-color:#fff;
+
+}}
+
+
+}
+
+
