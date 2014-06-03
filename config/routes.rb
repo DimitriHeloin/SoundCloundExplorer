@@ -9,6 +9,8 @@ get 'application/urltracks'
 get 'application/urllikes'
 get 'application/ajouteFollow'
 get 'application/deleteFollow'
+get 'application/search'
+get 'application/changeRoot'
 
 resources :followings,  only: [:index]
 

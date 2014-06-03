@@ -258,6 +258,35 @@ float: left;
 	top: 10px;
 	z-index: 1000;
 }
+
+#Search{
+	position: absolute;
+	top: 20px;
+	left:35%;
+	z-index: 10;
+		display: inline-block;
+		height: 60px;
+
+}
+#search-text{
+	position: relative;
+	float: left;
+	width: 200px;
+	height: 30px;
+
+}
+#buttonMoi
+{
+	position: relative;
+	float:right;
+	width: 50px;
+	height: 30px;
+}
+#search-result{
+	position: absolute;
+bottom: 0;}
+
+
 }
 @media (max-width: 300px)  {
 #mainWindow{
