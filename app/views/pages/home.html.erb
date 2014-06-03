@@ -19,15 +19,19 @@
 
   <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://w.soundcloud.com/player/api.js"></script>
+
 </head>
 
 <div id="buttonShowNav"></div>
 <div id="mainWindow">
+
   <div id="Search">
     <input type="text" class="form-control"  placeholder="Chercher artiste" name="username" id="search-text">
     <button id="buttonMoi">Moi</button>
     <ul data-role="listview"  id="search-result" data-theme="a"></ul>
   </div>
+
   <div id="viewWindow">
 
     <div id="dataWindow">
@@ -53,16 +57,19 @@
       <div id="listViewTrack" >
 
         <div id="tabs">
+
           <ul>
             <li><a href="#tabs-1">Tracks</a></li>
             <li><a href="#tabs-2">Likes</a></li>
           </ul>
           <div id="tabs-1" style="overflow-y: scroll;">
+            <div id="loadTracks"></div>
            <ul data-role="listview"  id="track-list" data-theme="a">
            </ul>
 
          </div>
          <div id="tabs-2" style="overflow-y: scroll;">
+            <div id="loadTracks"></div>
           <ul data-role="listview"  id="likes-list" data-theme="a">
           </ul>
 
@@ -75,7 +82,10 @@
     </div>
   </div>
 
-  <div id="tree-container"></div>
+  <div id="tree-container">
+      <div id="loadFollowers"></div>
+
+  </div>
 
 </div>
 <div class="player">
@@ -83,7 +93,6 @@
 </div>
 </div> 
 
-<script src="http://w.soundcloud.com/player/api.js"></script>
 <script>
   $(window).resize(function(){
     $height=$(window).height();
@@ -95,7 +104,27 @@
     $("#zoneAffichageTree").height($height-100);
     $("#zoneAffichageTree").width($width-100);
   });
-
+  $body = $("body");
+  $loadFollow=true;
+  $loadInit=false;
+  $loadTracks=false;
+  $loadLikes=false;
+$(document).on({
+    ajaxStart: function() { 
+      if($loadFollow==true){
+        $body.addClass("loadingFollowers")
+      }
+      if($loadTracks==true)
+      {
+        $body.addClass("loadingTracks");
+      }    
+    },
+     ajaxStop: function() {
+      $body.removeClass("loadingFollowers");
+      $body.removeClass("loadingTracks"); 
+    }    
+});
+              
   $(document).ready(function() {
     $requests=[];
     $("#buttonMoi").hide();
@@ -111,10 +140,10 @@
 
     $('#search-text').on('input', function() {
       $("#search-result").empty();  
-for(var i = 0; i < $requests.length; i++)
-    $requests[i].abort();
-$requests.push(
- $.ajax({
+      for(var i = 0; i < $requests.length; i++)
+        $requests[i].abort();
+      $requests.push(
+       $.ajax({
 
                                      url: "/application/search", // Route to the Script Controller method
                                      type: "GET",
@@ -135,7 +164,7 @@ $requests.push(
                                       //alert("Ajax error!")
                                     }
                                   })); 
-      
+
 });
 
 $( "#search-result" ).on("click","li#resultatRecherche", function(event) {    
@@ -199,7 +228,7 @@ $("#tracksNumber").hide();
 
 
 $("#buttonMoi").click(function(){
-    $.ajax({
+  $.ajax({
 
                                      url: "/application/changeRoot", // Route to the Script Controller method
                                      type: "GET",
@@ -264,14 +293,14 @@ $("#followbutton").click(function(){
                                     success: function(data, textStatus, xhr) {
                                       if($navigationSurMoi==true){
 
-                                      var index = $selectednode.parent.children.indexOf($selectednode);
-                                      if (index > -1) {
-                                        $selectednode.parent.children.splice(index, 1);
+                                        var index = $selectednode.parent.children.indexOf($selectednode);
+                                        if (index > -1) {
+                                          $selectednode.parent.children.splice(index, 1);
+                                        }
+                                        $rootNode[$rootNode.length-1].children.push($selectednode);
+                                        $functionClick($selectednode);
+                                        $functionClick($selectednode);
                                       }
-                                      $rootNode[$rootNode.length-1].children.push($selectednode);
-                                      $functionClick($selectednode);
-                                      $functionClick($selectednode);
-                                    }
                                       $("#followbutton").removeClass('btn-default');
                                       $("#followbutton").addClass('btn-warning');
                                       $("#followbutton").html('Following');
@@ -300,17 +329,17 @@ if($(this).html()=="Following")
 
                                       ) {},
                                     success: function(data, textStatus, xhr) {
-                                        if($navigationSurMoi==true){
+                                      if($navigationSurMoi==true){
 
-                                      var index = $selectednode.parent.children.indexOf($selectednode);
-                                      if (index > -1) {
-                                        $selectednode.parent.children.splice(index, 1);
+                                        var index = $selectednode.parent.children.indexOf($selectednode);
+                                        if (index > -1) {
+                                          $selectednode.parent.children.splice(index, 1);
+                                        }
+                                        $functionClick($rootNode[$rootNode.length-1]);
+                                        $functionClick($rootNode[$rootNode.length-1]);
+                                        setTimeout(function(){$functionUpdate($rootNode[$rootNode.length-1])
+                                        },750);
                                       }
-                                      $functionClick($rootNode[$rootNode.length-1]);
-                                      $functionClick($rootNode[$rootNode.length-1]);
-                                      setTimeout(function(){$functionUpdate($rootNode[$rootNode.length-1])
-                                      },750);
-                                    }
 
                                       $("#followbutton").removeClass('btn-warning');
                                       $("#followbutton").addClass('btn-default');
@@ -319,13 +348,13 @@ if($(this).html()=="Following")
                         {
                         $("#followbutton").html('Follow');                                //$myJson["children"]=data;
 
-                        }
-
-                      },
-                      error: function() {
-                        alert("Ajax error!")
                       }
-                    }); 
+
+                    },
+                    error: function() {
+                      alert("Ajax error!")
+                    }
+                  }); 
 }
 
 });
@@ -585,7 +614,10 @@ function initiategraph()
             // Toggle children on click.
 
             function click(d) {
+
+              $loadTracks=true;
               $selectednode=d;
+              console.log("now");
                 //if (d3.event.defaultPrevented) return; // click suppressed
                 if($premierClic==false)
                 {
@@ -631,17 +663,21 @@ function initiategraph()
 
                 $('#image').css("background-image","url("+d.avatar_url.replace("large", "t500x500")+")");
 
-                if(!d.children){
+                if(!d.children && !d._children){
+                  $loadFollow=true;
                   $.ajax({
                              url: "/followings", // Route to the Script Controller method
                              type: "GET",
                              dataType: "json",
                             data: { id_donne: d.id}, // This goes to Controller in params hash, i.e. params[:file_name]
-                            complete: function(
+                            complete: function() {
 
-
-                              ) {},
+                              console.log("complete");
+                            },
                             success: function(data, textStatus, xhr) {
+                              $loadFollow=false;
+
+                              console.log("ayé données");
                               var listNodes=flatten(root);            
                               var listeId=[];
                               var valeurEnTrop=[];
@@ -689,6 +725,7 @@ for(var k=0;k<valeurEnTrop.length;k++)
 
 update(d);
 
+
 }
 
 
@@ -698,6 +735,7 @@ error: function() {
   alert("Ajax error!")
 }
 });
+}
 $.ajax({
 
                              url: "/application/urllikes", // Route to the Script Controller method
@@ -729,8 +767,8 @@ $.ajax({
                             data: { id_donne: d.id}, // This goes to Controller in params hash, i.e. params[:file_name]
                             complete: function(
 
-
-                              ) {},
+                              ) {                              $loadTracks=false;
+},
                             success: function(data, textStatus, xhr) {
                               $("#track-list").empty();
                               for(var index =0;index<data["children"].length;index++)
@@ -745,7 +783,7 @@ $.ajax({
                               alert("Ajax error!")
                             }
                           }); 
-}
+
 
 
 
@@ -953,5 +991,6 @@ function update(source) {
 }
 
 
-</script
+</script>
+
 <%end%>

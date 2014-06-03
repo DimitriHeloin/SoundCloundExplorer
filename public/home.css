@@ -288,6 +288,50 @@ bottom: 0;}
 
 
 }
+
+#loadFollowers {
+    display:    none;
+    position:   absolute;
+    z-index:    1000;
+    bottom:        50px;
+    left:       50px;
+    height:     15px;
+    width:      128px;
+    background:url("ajax-loader.gif") 
+                100% 100% 
+                no-repeat;
+}
+
+body.loadingFollowers #loadFollowers {
+    display: block;
+}
+#loadTracks {
+    display:    none;
+    position:   absolute;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url("ajax-loader.gif") 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loadingTracks {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loadingTracks #loadTracks {
+    display: block;
+}
+
+
 @media (max-width: 300px)  {
 #mainWindow{
 	position:relative;
