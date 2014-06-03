@@ -318,11 +318,23 @@ body.loadingFollowers #loadFollowers {
                 50% 50% 
                 no-repeat;
 }
+#loadSearch {
+    display:    none;
+    position:   absolute;
+    z-index:    1000;
+    top:        50px;
+    right:       50px;
+    height:     100%;
+    width:      100%;
+    background:
+                url("ajax-loader.gif")  
+                no-repeat;
+}
 
 /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
-body.loadingTracks {
-    overflow: hidden;   
+body.loadingSearch #loadSearch {
+    display: block;
 }
 
 /* Anytime the body has the loading class, our

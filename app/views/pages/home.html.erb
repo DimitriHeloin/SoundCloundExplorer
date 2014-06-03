@@ -27,6 +27,8 @@
 <div id="mainWindow">
 
   <div id="Search">
+<div id="loadSearch"></div>
+
     <input type="text" class="form-control"  placeholder="Chercher artiste" name="username" id="search-text">
     <button id="buttonMoi">Moi</button>
     <ul data-role="listview"  id="search-result" data-theme="a"></ul>
@@ -105,10 +107,10 @@
     $("#zoneAffichageTree").width($width-100);
   });
   $body = $("body");
-  $loadFollow=true;
+  $loadFollow=false;
   $loadInit=false;
   $loadTracks=false;
-  $loadLikes=false;
+  $loadSearch=false;
 $(document).on({
     ajaxStart: function() { 
       if($loadFollow==true){
@@ -117,11 +119,16 @@ $(document).on({
       if($loadTracks==true)
       {
         $body.addClass("loadingTracks");
+      }
+       if($loadSearch==true)
+      {
+        $body.addClass("loadingSearch");
       }    
     },
      ajaxStop: function() {
       $body.removeClass("loadingFollowers");
       $body.removeClass("loadingTracks"); 
+      $body.removeClass("loadingSearch"); 
     }    
 });
               
@@ -139,6 +146,7 @@ $(document).on({
     $navigationSurMoi=true;
 
     $('#search-text').on('input', function() {
+      $loadSearch=true;
       $("#search-result").empty();  
       for(var i = 0; i < $requests.length; i++)
         $requests[i].abort();
@@ -149,14 +157,13 @@ $(document).on({
                                      type: "GET",
                                      dataType: "json",
                                     data: { username:  $("#search-text").val()}, // This goes to Controller in params hash, i.e. params[:file_name]
-                                    complete: function(
-
-
-                                      ) {},
+                                    complete: function() {
+                                    },
                                     success: function(data, textStatus, xhr) {
                                       $("#search-result").empty();  
 
                                       $('#search-result').append('<li style="cursor:pointer;" id="resultatRecherche" idguy='+data["children"].id+' ">'+data["children"].username+'</li>');
+                                        $loadSearch=false;
 
 
                                     },
