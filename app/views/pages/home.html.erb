@@ -97,6 +97,7 @@
   });
 
   $(document).ready(function() {
+    $requests=[];
     $("#buttonMoi").hide();
     $selectednode=null;
     $rootNode=null;
@@ -110,8 +111,10 @@
 
     $('#search-text').on('input', function() {
       $("#search-result").empty();  
-
-      $.ajax({
+for(var i = 0; i < $requests.length; i++)
+    $requests[i].abort();
+$requests.push(
+ $.ajax({
 
                                      url: "/application/search", // Route to the Script Controller method
                                      type: "GET",
@@ -129,9 +132,10 @@
 
                                     },
                                     error: function() {
-                                      alert("Ajax error!")
+                                      //alert("Ajax error!")
                                     }
-                                  }); 
+                                  })); 
+      
 });
 
 $( "#search-result" ).on("click","li#resultatRecherche", function(event) {    
@@ -147,6 +151,7 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
                                       ) {},
                                     success: function(data, textStatus, xhr) {
                                       $myJson=data;
+                                      console.log("ayé données récupérées");
                                       $("#zoneAffichageTree").remove();
                                       $("#search-result").empty();  
                                       $navigationSurMoi=false;
@@ -206,6 +211,7 @@ $("#buttonMoi").click(function(){
                                       ) {},
                                     success: function(data, textStatus, xhr) {
                                       $myJson=data;
+                                      console.log("ayé données récupérées");
                                       $("#zoneAffichageTree").remove();
                                       $("#search-result").empty();  
                                       $navigationSurMoi=true;
@@ -388,7 +394,7 @@ $.ajax({
 
 function initiategraph()
 {
-  treeJSON = d3.json("", function(error) {
+  treeJSON = d3.json("events.json", function(error) {
 
             // Calculate total nodes, max label length
             var totalNodes = 0;
@@ -691,9 +697,7 @@ update(d);
 error: function() {
   alert("Ajax error!")
 }
-}); 
-}
-
+});
 $.ajax({
 
                              url: "/application/urllikes", // Route to the Script Controller method
@@ -740,7 +744,10 @@ $.ajax({
                             error: function() {
                               alert("Ajax error!")
                             }
-                          });
+                          }); 
+}
+
+
 
 
 
