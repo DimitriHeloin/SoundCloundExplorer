@@ -105,6 +105,7 @@
     var viewerHeight = $("#tree-container").height();
     $("#zoneAffichageTree").height($height-100);
     $("#zoneAffichageTree").width($width-100);
+
   });
   $body = $("body");
   $loadFollow=false;
@@ -187,6 +188,28 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
                                       ) {},
                                     success: function(data, textStatus, xhr) {
                                       $myJson=data;
+                                        $.ajax({
+
+                                     url: "/followings", // Route to the Script Controller method
+                                     type: "GET",
+                                     dataType: "json",
+                                    data: { id_donne:  <%=@current_user.uid%>}, // This goes to Controller in params hash, i.e. params[:file_name]
+                                    complete: function(
+
+
+                                      ) {},
+                                    success: function(data2, textStatus, xhr) {
+                                      console.log(data2);
+                                      
+                                     
+
+
+
+                                    },
+                                    error: function() {
+                                      alert("Ajax error!")
+                                    }
+                                  }); 
                                       console.log("ayé données récupérées");
                                       $("#zoneAffichageTree").remove();
                                       $("#search-result").empty();  
@@ -391,10 +414,9 @@ if($(this).html()=="Following")
                               $("#track-list").empty();
                               for(var index =0;index<data["children"].length;index++)
                               {
-                                $('#track-list').append('<li style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'">'+data["children"][index].title+'</li>');
+                                $('#track-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="playcount"><p>'+data["children"][index].playback_count+'</p></div><div class="likescount"><p>'+data["children"][index].favoritings_count+'</p></li>');
 
                               }
-
 
                             },
                             error: function() {
@@ -415,7 +437,7 @@ $.ajax({
                               $("#likes-list").empty();
                               for(var index =0;index<data["children"].length;index++)
                               {
-                                $('#likes-list').append('<li style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'">'+data["children"][index].title+'</li>');
+                                $('#likes-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="playcount"><p>'+data["children"][index].playback_count+'</p></div><div class="likescount"><p>'+data["children"][index].favoritings_count+'</p></li>');
 
                               }
 
@@ -612,18 +634,32 @@ function initiategraph()
 
             $(document).on('click', '#track-list li ', function(){  
               var linkTrack = $(this).attr('linkPlayer');
-              SC.oEmbed(linkTrack, {auto_play: true,show_comments:false,show_artwork:false,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
+              SC.oEmbed(linkTrack, {auto_play: false,show_comments:false,show_artwork:true,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
+              if (oEmbed) $('#player').html(oEmbed.html.replace('visual=true&',''));
+
+
             });
             $(document).on('click', '#likes-list li ', function(){  
               var linkTrack = $(this).attr('linkPlayer');
-              SC.oEmbed(linkTrack, {auto_play: true,show_comments:false,show_artwork:false,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
+              SC.oEmbed(linkTrack, {auto_play: false,show_comments:false,show_artwork:true,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
+                            if (oEmbed) $('#player').html(oEmbed.html.replace('visual=true&',''));
+
             });
             // Toggle children on click.
 
             function click(d) {
+              var listNodes;
 
               $loadTracks=true;
               $selectednode=d;
+              listNodes=flatten(root);            
+        listNodes.forEach(function(entry)
+        {
+          if(getProfondeur(entry)>=getProfondeur($selectednode) && entry!=$selectednode)
+          {
+            collapse(entry);
+          }
+        });
               console.log("now");
                 //if (d3.event.defaultPrevented) return; // click suppressed
                 if($premierClic==false)
@@ -685,7 +721,7 @@ function initiategraph()
                               $loadFollow=false;
 
                               console.log("ayé données");
-                              var listNodes=flatten(root);            
+                               listNodes=flatten(root);            
                               var listeId=[];
                               var valeurEnTrop=[];
                               listNodes.forEach(function(entry)
@@ -757,7 +793,7 @@ $.ajax({
                               $("#likes-list").empty();
                               for(var index =0;index<data["children"].length;index++)
                               {
-                                $('#likes-list').append('<li style="cursor:pointer;"  linkPlayer="'+data["children"][index].uri+'">'+data["children"][index].title+'</li>');
+                                 $('#likes-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="playcount"><p>'+data["children"][index].playback_count+'</p></div><div class="likescount"><p>'+data["children"][index].favoritings_count+'</p></li>');
 
                               }
                             },
@@ -780,7 +816,7 @@ $.ajax({
                               $("#track-list").empty();
                               for(var index =0;index<data["children"].length;index++)
                               {
-                                $('#track-list').append('<li style="cursor:pointer;"  linkPlayer="'+data["children"][index].uri+'">'+data["children"][index].title+'</li>');
+                                 $('#track-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="playcount"><p>'+data["children"][index].playback_count+'</p></div><div class="likescount"><p>'+data["children"][index].favoritings_count+'</p></li>');
 
                               }
 
@@ -792,10 +828,27 @@ $.ajax({
                           }); 
 
 
+      
 
 
 
-
+}
+function getProfondeur(d)
+{
+  var tempnode=d;
+             var testParent=true;
+             var compteur=0;
+          while(testParent==true)
+          {
+            if(tempnode.parent)
+            {
+              tempnode=tempnode.parent;
+              compteur++;
+            }
+            else
+              testParent=false;
+          }
+      return compteur;
 }
 
 function flatten(root) {

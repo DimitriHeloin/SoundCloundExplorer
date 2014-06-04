@@ -1,359 +1,463 @@
 @media (min-width: 300px) {
-  
-#mainWindow{
-	position:relative;
-	width: 100%;
-	height: 100%;
-	background-color:#EEE;
 
-}
-#viewWindow{
-	position: relative;
-	width: 100%;
-}
-#dataWindow{
-	position:relative;
-	float: left;
-	width: 30%;
-	height: 100%;
-	display: block;
-}
-#listViewTrack{
-	height: 60%;
-	width: 100%;
-}
-#tabs{
-	height: 100%;
-	width: 100%;
-}
-#tabs-1{
-	height: 90%;
-	width: 100%;
-}
-#tabs-2{
-	height: 90%;
-	width: 100%;
-}
+	#mainWindow{
+		position:relative;
+		width: 100%;
+		height: 100%;
+		background-color:#EEE;
+
+	}
+	#viewWindow{
+		position: relative;
+		width: 100%;
+	}
+	#dataWindow{
+		position:relative;
+		float: left;
+		width: 30%;
+		height: 100%;
+		display: block;
+	}
+	#listViewTrack{
+		height: 60%;
+		width: 100%;
+	}
+	#tabs{
+		height: 100%;
+		width: 100%;
+	}
+	#tabs-1{
+		height: 90%;
+		width: 100%;
+	}
+	#tabs-2{
+		height: 90%;
+		width: 100%;
+	}
 
 
-#value{
-	width:100%;
-	height:40%;
-	background-color: white;
-	left: 0;
-	position: relative;
-	 }
+	#value{
+		width:100%;
+		height:40%;
+		background-color: white;
+		left: 0;
+		position: relative;
+	}
 
-#previewGuy{
-	position: relative;
-	width: 100%;
-	height: 70%;
-}
-#image{
-	position: relative;
-	float: left;
+	#previewGuy{
+		position: relative;
+		width: 100%;
+		height: 70%;
+	}
+	#image{
+		position: relative;
+		float: left;
 		padding-left: 1%;
 		padding-top: 1%;
-	width:50%;
-	height:100%;
-	background-repeat: no-repeat;
-	background-size:contain;
-}
-#infos{
-	position: relative;
-	float: left;
-	width: 50%;
-	height: 100%;
-}
-#username{
-	font-size: 1.3em;
-font-family: 'PT Serif', serif;
-	font-weight:bold;
-	width: 80%;
-	position: relative;
-	left: 10%;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	background-color: #EEE;
-}
-#full_name{
-	left: 10%;
-	font-size: 0.7em;
-	width: 80%;
-	position: relative;
-	left: 10%;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	background-color: #EEE;
-}
-#city{
-	left: 10%;
-	position: relative;
+		width:50%;
+		height:100%;
+		background-repeat: no-repeat;
+		background-size:contain;
+	}
+	#infos{
+		position: relative;
+		float: left;
+		width: 50%;
+		height: 100%;
+	}
+	#username{
+		font-size: 1.3em;
+		font-family: 'PT Serif', serif;
+		font-weight:bold;
+		width: 80%;
+		position: relative;
+		left: 10%;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		background-color: #EEE;
+	}
+	#full_name{
+		left: 10%;
+		font-size: 0.7em;
+		width: 80%;
+		position: relative;
+		left: 10%;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		background-color: #EEE;
+	}
+	#city{
+		left: 10%;
+		position: relative;
 
-}
-#country{
-	left: 10%;
-	position: relative;
+	}
+	#country{
+		left: 10%;
+		position: relative;
 
-}
-#stats{
-	position: relative;
-	width: 100%;
-	height: 30%;
-	display: inline-block;
-}
-#followers{
-	height: 100%;
-	width: 20%;
-position: relative;
-float: left;
-padding-left: 30px;
-}
-#followers:before{
- content: "";
-    background: url("followers.png") no-repeat;
-    background-size: 100%;
-    width: 20px;
-    height: 80%;
-    position: absolute;
-    left: 5px;
+	}
+	#stats{
+		position: relative;
+		width: 100%;
+		height: 30%;
+		display: inline-block;
+	}
+	#followers{
+		height: 100%;
+		width: 20%;
+		position: relative;
+		float: left;
+		padding-left: 30px;
+	}
+	#followers:before{
+		content: "";
+		background: url("followers.png") no-repeat;
+		background-size: 100%;
+		width: 20px;
+		height: 80%;
+		position: absolute;
+		left: 5px;
 
-}
-#following{	
-	height: 100%;
-	width: 20%;
-position: relative;
-float: left;
-padding-left: 50px;
-}
-#following:before{
- content: "";
-    background: url("following.png") no-repeat;
-    background-size: 100%;
-    width: 20px;
-    height: 80%;
-    position: absolute;
-    left: 25px;
+	}
+	#following{	
+		height: 100%;
+		width: 20%;
+		position: relative;
+		float: left;
+		padding-left: 50px;
+	}
+	#following:before{
+		content: "";
+		background: url("following.png") no-repeat;
+		background-size: 100%;
+		width: 20px;
+		height: 80%;
+		position: absolute;
+		left: 25px;
 
-}
-#tracksNumber{
-	height: 100%;
-	width: 20%;
-padding-left: 10px;
-position: relative;
-float: left;
-padding-left: 35px;
+	}
+	#tracksNumber{
+		height: 100%;
+		width: 20%;
+		padding-left: 10px;
+		position: relative;
+		float: left;
+		padding-left: 35px;
 
-}
-#tracksNumber:before{
- content: "";
-    background: url("tracks.png") no-repeat;
-    background-size: 100%;
-    width: 20px;
-    height: 80%;
-    left: -2px;
-    position: absolute;
+	}
+	#tracksNumber:before{
+		content: "";
+		background: url("tracks.png") no-repeat;
+		background-size: 100%;
+		width: 20px;
+		height: 80%;
+		left: -2px;
+		position: absolute;
 
-}
+	}
 
-#follow{
-	height: 100%;
-	width: 40%;
-	padding-left: 10px;
-position: relative;
-float: left;
-}
+	#follow{
+		height: 100%;
+		width: 40%;
+		padding-left: 10px;
+		position: relative;
+		float: left;
+	}
 
-#followbutton{
-	width: 70%;
-	height: 30%;
-	color: black;
-}
-
-
+	#followbutton{
+		width: 70%;
+		height: 30%;
+		color: black;
+	}
 
 
 
-.player{
-
-	position: relative;
-	width: 100%;
-}
-#tree-container{
-	position: relative;
-	float: left;
-	width: 70%;
-	height: 100%;
-}
 
 
+	.player{
 
-          
-    .node {
-    cursor: pointer;
-  }
-
-  .overlay{
-      background-color:#EEE;
-  }
-   
-  .node circle {
-    fill: #fff;
-    stroke: #FF9531;
-    stroke-width: 1.5px;
-  }
- 
-  .node text {
-    font-size:10px; 
-    font-family:sans-serif;
-  }
-   
-  .link {
-    fill: none;
-    stroke: #ccc;
-    stroke-width: 1.5px;
-  }
-
-  .templink {
-    fill: none;
-    stroke: red;
-    stroke-width: 3px;
-  }
-
-  .ghostCircle.show{
-      display:block;
-  }
-
-  .ghostCircle, .activeDrag .ghostCircle{
-       display: none;
-  }
-  .ui-content {
-    padding: 10px ;
-}
- 
-.ui-listview {
-    margin: 10px ;
-}
+		position: relative;
+		width: 100%;
+	}
+	#tree-container{
+		position: relative;
+		float: left;
+		width: 70%;
+		height: 100%;
+	}
 
 
-#tabs{
-	position: relative;
-
-}
 
 
-#tabs ul{
-	display: inline-block;
+	.node {
+		cursor: pointer;
+	}
 
-}
+	.overlay{
+		background-color:#EEE;
+	}
 
-#buttonShowNav{
-	width: 40px;
-	height: 40px;
-	background-image: url('menu.png');
-	background-size: 100%;
+	.node circle {
+		fill: #fff;
+		stroke: #FF9531;
+		stroke-width: 1.5px;
+	}
 
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	z-index: 1000;
-}
+	.node text {
+		font-size:10px; 
+		font-family:sans-serif;
+	}
 
-#Search{
-	position: absolute;
-	top: 20px;
-	left:35%;
-	z-index: 10;
+	.link {
+		fill: none;
+		stroke: #ccc;
+		stroke-width: 1.5px;
+	}
+
+	.templink {
+		fill: none;
+		stroke: red;
+		stroke-width: 3px;
+	}
+
+	.ghostCircle.show{
+		display:block;
+	}
+
+	.ghostCircle, .activeDrag .ghostCircle{
+		display: none;
+	}
+	.ui-content {
+		padding: 10px ;
+	}
+
+	.ui-listview {
+		margin: 10px ;
+	}
+
+
+	#tabs{
+		position: relative;
+
+	}
+
+
+	#tabs ul{
+		display: inline-block;
+
+	}
+
+	#buttonShowNav{
+		width: 40px;
+		height: 40px;
+		background-image: url('menu.png');
+		background-size: 100%;
+
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		z-index: 1000;
+	}
+
+	#Search{
+		position: absolute;
+		top: 20px;
+		left:35%;
+		z-index: 10;
 		display: inline-block;
 		height: 60px;
 
-}
-#search-text{
-	position: relative;
-	float: left;
-	width: 200px;
-	height: 30px;
+	}
+	#search-text{
+		position: relative;
+		float: left;
+		width: 200px;
+		height: 30px;
 
-}
-#buttonMoi
-{
-	position: relative;
-	float:right;
-	width: 50px;
-	height: 30px;
-}
-#search-result{
-	position: absolute;
-bottom: 0;}
+	}
+	#buttonMoi
+	{
+		position: relative;
+		float:right;
+		width: 50px;
+		height: 30px;
+	}
+	#search-result{
+		position: absolute;
+		bottom: 0;}
 
 
-}
+	}
 
-#loadFollowers {
-    display:    none;
-    position:   absolute;
-    z-index:    1000;
-    bottom:        50px;
-    left:       50px;
-    height:     15px;
-    width:      128px;
-    background:url("ajax-loader.gif") 
-                100% 100% 
-                no-repeat;
-}
+	#loadFollowers {
+		display:    none;
+		position:   absolute;
+		z-index:    1000;
+		bottom:        50px;
+		left:       50px;
+		height:     15px;
+		width:      128px;
+		background:url("ajax-loader.gif") 
+		100% 100% 
+		no-repeat;
+	}
 
-body.loadingFollowers #loadFollowers {
-    display: block;
-}
-#loadTracks {
-    display:    none;
-    position:   absolute;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .8 ) 
-                url("ajax-loader.gif") 
-                50% 50% 
-                no-repeat;
-}
-#loadSearch {
-    display:    none;
-    position:   absolute;
-    z-index:    1000;
-    top:        50px;
-    right:       50px;
-    height:     100%;
-    width:      100%;
-    background:
-                url("ajax-loader.gif")  
-                no-repeat;
-}
+	body.loadingFollowers #loadFollowers {
+		display: block;
+	}
+	#loadTracks {
+		display:    none;
+		position:   absolute;
+		z-index:    1000;
+		top:        0;
+		left:       0;
+		height:     100%;
+		width:      100%;
+		background: rgba( 255, 255, 255, .8 ) 
+		url("ajax-loader.gif") 
+		50% 50% 
+		no-repeat;
+	}
+	#loadSearch {
+		display:    none;
+		position:   absolute;
+		z-index:    1000;
+		top:        50px;
+		right:       50px;
+		height:     100%;
+		width:      100%;
+		background:
+		url("ajax-loader.gif")  
+		no-repeat;
+	}
 
 /* When the body has the loading class, we turn
-   the scrollbar off with overflow:hidden */
+the scrollbar off with overflow:hidden */
 body.loadingSearch #loadSearch {
-    display: block;
+	display: block;
 }
 
 /* Anytime the body has the loading class, our
-   modal element will be visible */
+modal element will be visible */
 body.loadingTracks #loadTracks {
-    display: block;
+	display: block;
+}
+
+.titreTrack{
+
+	position: relative;
+	float: left;
+	width: 60%;
+	height: 30px;
+	font-size: 0.8em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+.titreTrack p{
+	display: table-cell;
+	height: 30px;
+	vertical-align: middle;
+	text-align:right;
+
+
+}
+.playcount{
+	position: relative;
+	float: left;
+	width: 20%;
+	height: 30px;
+	font-size: 0.8em;
+	text-align:right;
+	height: 30px;
+	display:table;
+	text-align:right;
+
+}
+
+.playcount p{
+	display: table-cell;
+	vertical-align: middle;
+		padding-right: 24px;
+
+
+}
+.playcount p:after{
+	content: "";
+	background: url("playicon.png") no-repeat;
+	background-size: 100%;
+	width: 20px;
+	height: 80%;
+	position: absolute;
+}
+
+.likescount{
+	position: relative;
+	float: left;
+	width: 20%;
+	height: 30px;
+	font-size: 0.8em;
+		display:table;
+	text-align:right;
+}
+.likescount p{
+	display: table-cell;
+	vertical-align: middle;	height: 30px;
+		padding-right: 24px;
+
+
+}
+.likescount p:after{
+	content: "";
+	background: url("likeicon.png") no-repeat;
+	background-size: 100%;
+	width: 20px;
+	height: 80%;
+	position: absolute;
+
+}
+
+.track_li{
+	width: 100%;
+	height: 30px;
+	border-top-style:solid;
+	border-right-style:solid;
+	border-left-style:solid;
+	border-width:1px;
+	border-color: #EAEAEA;
+}
+
+#likes-list
+{
+	width: 100%;
+	padding: 14px;
+	margin: 0px;
+}
+#tracks-list
+{
+	width: 100%;
+	padding: 14px;
+	margin: 0px;
+
+}
+#tabs ul
+{
+	list-style-type: none;
+
 }
 
 
 @media (max-width: 300px)  {
-#mainWindow{
-	position:relative;
-	width: 100%;
-	height: 100%;
-	background-color:#fff;
+	#mainWindow{
+		position:relative;
+		width: 100%;
+		height: 100%;
+		background-color:#fff;
 
-}}
+		}}
 
 
-}
+	}
 
 
