@@ -20,6 +20,8 @@
   <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://w.soundcloud.com/player/api.js"></script>
+<link rel="stylesheet" href="jquery.mCustomScrollbar.css" />
+<script src="jquery.mCustomScrollbar.concat.min.js"></script>
 
 </head>
 
@@ -63,14 +65,15 @@
           <ul>
             <li><a href="#tabs-1">Tracks</a></li>
             <li><a href="#tabs-2">Likes</a></li>
+            <li id="tab-playlist"><a href="#tabs-3">Playlists</a></li>
           </ul>
-          <div id="tabs-1" style="overflow-y: scroll;">
+          <div id="tabs-1">
             <div id="loadTracks"></div>
            <ul data-role="listview"  id="track-list" data-theme="a">
            </ul>
 
          </div>
-         <div id="tabs-2" style="overflow-y: scroll;">
+         <div id="tabs-2" >
             <div id="loadTracks"></div>
           <ul data-role="listview"  id="likes-list" data-theme="a">
           </ul>
@@ -145,6 +148,9 @@ $(document).on({
     $functionflatten=null;
     $functionExpand=null;
     $navigationSurMoi=true;
+    $("#tabs-1").mCustomScrollbar();
+    $("#tabs-2").mCustomScrollbar();
+
 
     $('#search-text').on('input', function() {
       $loadSearch=true;
@@ -394,6 +400,7 @@ if($(this).html()=="Following")
 
         $('#image').css("background-image","url("+"<%=@client.get('/me').avatar_url.sub! 'large', 't500x500'%>" +")");
         $( "#tabs" ).tabs();
+        $("div.ui-tabs-panel").css('padding','0px');
 
 
 
