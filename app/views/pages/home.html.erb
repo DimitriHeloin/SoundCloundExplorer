@@ -50,11 +50,13 @@
           </div>
         </div>
         <div id="stats">
+        <div id="test">
           <div id="followers"></div>
           <div id="following"></div>
           <div id="tracksNumber"></div> 
           <div id="follow">
             <button type="button" idToFollow="" class="btn btn-default" id="followbutton">Follow</button>
+            </div>
           </div>
         </div>
       </div>
@@ -62,10 +64,10 @@
 
         <div id="tabs">
 
-          <ul>
-            <li><a href="#tabs-1">Tracks</a></li>
+          <ul id="mytabs">
+            <li ><a href="#tabs-1">Tracks</a></li>
             <li><a href="#tabs-2">Likes</a></li>
-            <li id="tab-playlist"><a href="#tabs-3">Playlists</a></li>
+            <li class="tabPlaylist"><a href="#tabs-3">Playlists</a></li>
           </ul>
           <div id="tabs-1">
             <div id="loadTracks"></div>
@@ -685,9 +687,9 @@ function initiategraph()
                 document.getElementById("full_name").innerHTML=d.full_name; 
                 document.getElementById("city").innerHTML=d.city; 
                 document.getElementById("country").innerHTML=d.country; 
-                document.getElementById("following").innerHTML=d.followings_count; 
-                document.getElementById("followers").innerHTML=+d.followers_count; 
-                document.getElementById("tracksNumber").innerHTML=+d.track_count; 
+                document.getElementById("following").innerHTML='<p>'+d.followings_count+'</p>'; 
+                document.getElementById("followers").innerHTML='<p>'+d.followers_count+'</p>'; 
+                document.getElementById("tracksNumber").innerHTML='<p>'+d.track_count+'</p>'; 
 
                 $("#followbutton").attr('idToFollow',d.id);
                 var testDeja=false;
