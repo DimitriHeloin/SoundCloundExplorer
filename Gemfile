@@ -8,6 +8,7 @@ gem 'binding_of_caller'
 gem 'd3_rails'
 gem 'json'
 gem 'pry'
+gem 'nifty-generators', '~> 0.4.6'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

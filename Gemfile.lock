@@ -83,6 +83,7 @@ GEM
     multi_json (1.8.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
+    nifty-generators (0.4.6)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -173,6 +174,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   json
+  nifty-generators (~> 0.4.6)
   omniauth-soundcloud
   pg
   pry
