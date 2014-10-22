@@ -8,7 +8,7 @@
             <div id="city"></div>
             <div id="country"></div>
           </div>
-        </div>
+        </div> 
         <div id="stats">
         <div id="test">
           <div id="followers"></div>
@@ -16,6 +16,7 @@
           <div id="tracksNumber"></div> 
           <div id="follow">
             <button type="button" idToFollow="" class="btn btn-default" id="followbutton">Follow</button>
+            <button type="button" idToAdd="" class = "btn btn-default" id="addfriendbutton"> Add Friend</button>
             </div>
           </div>
         </div>
@@ -344,6 +345,32 @@ if($(this).html()=="Following")
                   }); 
 }
 
+});$("#addfriendbutton").click(function(){
+ 
+    $idtoadd=$(this).attr("idtoadd");
+    $.ajax({
+
+                                     url: "/friendships/", 
+                                     type: "POST",
+                                     dataType: "json",
+                                    data: { friend_id: $idtoadd}, 
+                                    complete: function(
+
+
+                                      ) {},
+                                    success: function(data, textStatus, xhr) {
+                                      console.log(data);
+                                      if(data.result==true)
+                                      {
+                                        alert("ami ajouté")
+                                      }
+                                      else
+                                        alert("l'utilisateur n'est pas inscrit sur soundcloud explorer, parlez lui de l'application pour qu'il s'inscrive blablabla")
+                  },
+                  error: function() {
+                  }
+                }); 
+
 });
 
         //Ici on met les infos du mec qui s'enregistre
@@ -352,7 +379,6 @@ if($(this).html()=="Following")
         $('#image').css("background-image","url("+"<%=@client.get('/me').avatar_url.sub! 'large', 't500x500'%>" +")");
         $( "#tabs" ).tabs();
         $("div.ui-tabs-panel").css('padding','0px');
-
 
 
         // ici on charge le dernier like du mec enregistré

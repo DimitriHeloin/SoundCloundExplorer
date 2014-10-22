@@ -239,6 +239,8 @@
                 document.getElementById("tracksNumber").innerHTML='<p>'+d.track_count+'</p>'; 
 
                 $("#followbutton").attr('idToFollow',d.id);
+                $("#addfriendbutton").attr('idToAdd',d.id);
+                
                 var testDeja=false;
                 for(var i=0;i<$myFollowList.length;i++)
                 {

@@ -19,21 +19,42 @@ class FriendshipsController < ApplicationController
 
   # GET /friendships/1/edit
   def edit
+
   end
 
   # POST /friendships
   # POST /friendships.json
   def create
-    @friendship = Friendship.new(friendship_params)
 
-    respond_to do |format|
-      if @friendship.save
-        format.html { redirect_to @friendship, notice: 'Friendship was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @friendship }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @friendship.errors, status: :unprocessable_entity }
+    @user=User.where(uid: params[:friend_id])
+    @test_deja_ami=false;
+    if @user.length==1
+
+      current_user.friends.each do |t|
+        if t.uid==params[:friend_id]
+          @test_deja_ami=true;
+        else
+        end
       end
+      if @test_deja_ami==false
+        
+        @friendship = current_user.friendships.build(:friend_id=>User.where(uid: params[:friend_id]).take.id)
+        if @friendship.save
+          respond_to do |format|
+          format.html # show.html.erb
+          format.json  { render :json => {result:true} }    end
+          # flash[:notice]="Added friend."
+          # redirect_to root_url
+        else
+          # flash[:notice]="Unable to add friend."
+          # redirect_to root_url
+        end
+      end
+      
+    else
+      respond_to do |format|
+      format.html # show.html.erb
+      format.json  { render :json => {result:false} }    end
     end
   end
 
@@ -54,11 +75,11 @@ class FriendshipsController < ApplicationController
   # DELETE /friendships/1
   # DELETE /friendships/1.json
   def destroy
+    @friendship = Friendship.find(params[:id])
     @friendship.destroy
-    respond_to do |format|
-      format.html { redirect_to friendships_url }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "successfully destroyed friendship."
+    redirect_to root_url
+    
   end
 
   private
