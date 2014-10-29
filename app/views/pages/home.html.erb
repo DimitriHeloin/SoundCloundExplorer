@@ -12,6 +12,8 @@
   <link rel="stylesheet" type="text/css" href="jqueryui.css">
   <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="jquery.scrollabletab.js"></script>
+  <script src="plusTabs.js"></script>
 
   <script src="//connect.soundcloud.com/sdk.js"></script>
   <%= javascript_include_tag "application" %>
@@ -22,7 +24,6 @@
   <script src="http://w.soundcloud.com/player/api.js"></script>
 <link rel="stylesheet" href="jquery.mCustomScrollbar.css" />
 <script src="jquery.mCustomScrollbar.concat.min.js"></script>
-<script  src="graph2.js.erb"></script>
 <script type="text/javascript">
   $valeur_id_client=<%=current_user.uid%>
 </script>
@@ -51,5 +52,9 @@
   <iframe id="soundcloud_widget" width="100%" height="100px" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=<%=@client.get('/me/favorites')[0].uri%>&show_artwork=false&liking=true&sharing=false&auto_play=false&visuel=false" ></iframe>
 </div>
 </div> 
+
+<script>
+  
+</script>
 
 <%end%>

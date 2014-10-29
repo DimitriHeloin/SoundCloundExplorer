@@ -10,6 +10,16 @@ class FriendshipsController < ApplicationController
   # GET /friendships/1
   # GET /friendships/1.json
   def show
+    
+  end
+
+  def getFriendshipsPerUser
+    @friendships=Friendship.where(user_id:params[:id_donne])
+
+    respond_to do |format|
+          format.html # show.html.erb
+          format.json  { render :json => {children:@friendships} }
+        end    
   end
 
   # GET /friendships/new

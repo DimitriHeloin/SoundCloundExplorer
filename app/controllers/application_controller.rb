@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
 
 
   end
+  
   def urllikes 
       if params[:id_donne] 
         if current_user

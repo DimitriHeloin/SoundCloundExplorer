@@ -1,6 +1,6 @@
 Deviseomn::Application.routes.draw do
   resources :friendships
-
+  resources :users 
 
   devise_for :users
   get "/" => "pages#home", as: "root"
@@ -14,7 +14,10 @@ get 'application/ajouteFollow'
 get 'application/deleteFollow'
 get 'application/search'
 get 'application/changeRoot'
+get 'users/sign_out', to: 'devise/session#destroy'
 
+get '/users/show/:id', to: 'users#show'
+get '/friendships/getFriendshipsPerUser/:id', to: 'friendships#getFriendshipsPerUser'
 
 resources :followings,  only: [:index]
 

@@ -23,27 +23,67 @@
       </div>
       <div id="listViewTrack" >
 
-        <div id="tabs">
-
-          <ul id="mytabs">
-            <li ><a href="#tabs-1">Tracks</a></li>
-            <li><a href="#tabs-2">Likes</a></li>
-            <li class="tabPlaylist"><a href="#tabs-3">Playlists</a></li>
-          </ul>
-          <div id="tabs-1">
-            <div id="loadTracks"></div>
-           <ul data-role="listview"  id="track-list" data-theme="a">
-           </ul>
-
-         </div>
-         <div id="tabs-2" >
-            <div id="loadTracks"></div>
-          <ul data-role="listview"  id="likes-list" data-theme="a">
-          </ul>
-
-        </div>
-
+      <div id="tabsWithStyle" class="style-tabs">
+      <ul id="mytabs">
+        <li><a href="#tracks"><div class="icon tracks-icon">Tracks</div></a></li>
+        <li><a href="#likes"><div class="icon likes-icon">Likes</div></a></li>
+        <li><a href="#playlists"><div class="icon playlists-icon">Playlists</div></a></li>
+        <li><a href="#user-friends"><div class="icon user-friends-icon">Friends</div></a></li>
+        <li class="tabFriends"><a href="#my-friends"><div class="icon my-friends-icon">My Friends</div></a></li>
+      </ul>
+      <div id="tracks">
+        <ul data-role="listview"  id="track-list" data-theme="a">
       </div>
+      <div id="likes">
+        <ul data-role="listview"  id="likes-list" data-theme="a">
+      </div>
+      <div id="playlists">
+        <ul data-role="listview"  id="playlists-list" data-theme="a">
+      </div>
+      <div id="user-friends">
+        <ul data-role="listview"  id="user-friends-list" data-theme="a">
+      </div>
+      <div id="my-friends">
+        <ul data-role="listview"  id="my-friends-list" data-theme="a">
+      </div>
+      
+    </div>
+    <script type="text/javascript">
+      function changeRoot(id_donne)
+      {
+        $.ajax({
+
+            url: "/application/changeRoot", // Route to the Script Controller method
+            type: "GET",
+            dataType: "json",
+            data: { id_donne:  id_donne}, // This goes to Controller in params hash, i.e. params[:file_name]
+            complete: function() {},
+            success: function(data, textStatus, xhr) {
+                  $myJson=data;
+                  $.ajax({
+
+                        url: "/followings", // Route to the Script Controller method
+                        type: "GET",
+                        dataType: "json",
+                        data: { id_donne:  <%=@current_user.uid%>}, // This goes to Controller in params hash, i.e. params[:file_name]
+                        complete: function() {},
+                        success: function(data2, textStatus, xhr) {},
+                        error: function() {alert("Ajax error!")}
+                      }); 
+
+              console.log("ayé données récupérées");
+              $("#zoneAffichageTree").remove();
+              $("#search-result").empty();  
+              $navigationSurMoi=false;
+              initiategraph();
+              $("#buttonMoi").show();
+              $("#search-text").val("");
+            },
+            error: function() {alert("Ajax error!");}
+                                   
+      });
+}$("#tabsWithStyle").tabs();
+    </script>
 
 
 
@@ -67,6 +107,7 @@ $(window).resize(function(){
   $loadInit=false;
   $loadTracks=false;
   $loadSearch=false;
+
 $(document).on({
     ajaxStart: function() { 
       if($loadFollow==true){
@@ -90,6 +131,11 @@ $(document).on({
               
   $(document).ready(function() {
     $requests=[];
+    $arrayvaleurmyfriends=[];
+    $friend_image_url=null;
+
+    $compteurFriends=0;
+    $donneesfriends=null;
     $("#buttonMoi").hide();
     $selectednode=null;
     $rootNode=null;
@@ -100,8 +146,8 @@ $(document).on({
     $functionflatten=null;
     $functionExpand=null;
     $navigationSurMoi=true;
-    $("#tabs-1").mCustomScrollbar();
-    $("#tabs-2").mCustomScrollbar();
+    $("#tracks").mCustomScrollbar();
+    $("#likes").mCustomScrollbar();
 
 
     $('#search-text').on('input', function() {
@@ -132,7 +178,7 @@ $(document).on({
                                   })); 
 
 });
-
+ 
 $( "#search-result" ).on("click","li#resultatRecherche", function(event) {    
   $.ajax({
 
@@ -185,6 +231,8 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
                                   }); 
 
 });
+
+
 initiategraph();
 
 $("#headeralakon").css("top","-52px");
@@ -377,7 +425,7 @@ if($(this).html()=="Following")
         document.getElementById("username").innerHTML="<%=@current_user.username%>"; 
 
         $('#image').css("background-image","url("+"<%=@client.get('/me').avatar_url.sub! 'large', 't500x500'%>" +")");
-        $( "#tabs" ).tabs();
+        // $( "#tabs" ).tabs();
         $("div.ui-tabs-panel").css('padding','0px');
 
 
@@ -431,5 +479,61 @@ $.ajax({
                               alert("Ajax error!")
                             }
                           }); 
+
+$.ajax({
+
+                                     url: "/friendships/getFriendshipsPerUser/6", // Route to the Script Controller method
+                                     type: "GET",
+                                     dataType: "json",
+                                     data:{id_donne: <%=@current_user.id%>} ,
+                                    complete: function() {},
+                                    success: function(data, textStatus, xhr) {
+                                      $donneesfriends=data;
+                                      for(var index=0;index<data["children"].length;index++)
+                                      {
+                                        // $arrayvaleurmyfriends.push(data["children"][index]["friend_id"]);
+                                           $.ajax({
+                                            url:"/users/show/"+data["children"][index].friend_id,
+                                            type :"GET",
+                                            dataType: "json",
+                                            data:{id_donne: data["children"][index].friend_id},
+                                            complete: function(){},
+                                            success: function(data, textStatus, xhr){
+                                              $compteurFriends++;
+                                              var friend_id=$donneesfriends["children"][$compteurFriends-1].friend_id;
+                                              $friend_image_url=null;
+
+
+                                            $.ajax({
+
+                                                 url: "/users/"+friend_id, // Route to the Script Controller method
+                                                 type: "GET",
+                                                 dataType: "json",
+                                                 data:{id_donne: friend_id} ,
+                                                complete: function(data, textStatus, xhr) {},
+                                                success: function(data, textStatus, xhr) {
+                                                  console.log("ami");
+                                                  console.log(data);
+                                                  $friend_image_url=data["children"][0].image_url;
+                                                   $('#my-friends-list').append('<li class="friend_li" style="cursor:pointer;" onclick="changeRoot('+data["children"][0].uid+')"><div class="previewFriend" id="my-friends-list-'+friend_id+'" id_friend='+friend_id+'></div></li>');
+
+                                                $('#my-friends-list-'+friend_id).css("background-image","url("+$friend_image_url+")");
+
+                                                },
+                                                error: function(){}
+                                              });
+
+                                               
+
+
+                                            },
+                                            error: function(){console.log("attends gros");}
+                                          });
+                                       }
+                                    },
+                                    error: function() { console.log("fail") }
+                                  }); 
+
+
 });
   </script>
