@@ -53,7 +53,7 @@
       {
         $.ajax({
 
-            url: "/application/changeRoot", // Route to the Script Controller method
+            url: "/application/changeRoot/"+id_donne, // Route to the Script Controller method
             type: "GET",
             dataType: "json",
             data: { id_donne:  id_donne}, // This goes to Controller in params hash, i.e. params[:file_name]
