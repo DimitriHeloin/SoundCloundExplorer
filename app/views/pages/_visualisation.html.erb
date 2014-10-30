@@ -53,7 +53,7 @@
       {
         $.ajax({
 
-            url: "/application/changeRoot/"+id_donne, // Route to the Script Controller method
+            url: "/application/changeRoot", // Route to the Script Controller method
             type: "GET",
             dataType: "json",
             data: { id_donne:  id_donne}, // This goes to Controller in params hash, i.e. params[:file_name]
@@ -582,7 +582,7 @@ $.ajax({
                                                  data:{id_donne: friend_id} ,
                                                 complete: function(data, textStatus, xhr) {},
                                                 success: function(data, textStatus, xhr) {
-                                                  console.log("ami");
+                                                  console.log("data ami");
                                                   console.log(data);
                                                   $friend_image_url=data["children"][0].image_url;
                                                    $('#my-friends-list').append('<li class="friend_li" style="cursor:pointer;" onclick="changeRoot('+data["children"][0].uid+')"><div class="previewFriend" id="my-friends-list-'+friend_id+'" id_friend='+friend_id+'></div></li>');
