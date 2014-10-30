@@ -1,6 +1,6 @@
 Deviseomn::Application.routes.draw do
   resources :friendships
-  resources :users 
+  resources :users, except: [:sign_out,:destroy]
   devise_for :users
   get "/" => "pages#home", as: "root"
   get '/auth/:provider', to: 'pages#create_soundcloud'
@@ -17,6 +17,7 @@ get 'application/changeRoot'
 
 
 get '/users/show/:id', to: 'users#show'
+get '/users/sign_out', to: 'devise/session#destroy' 
 get '/users/:id', to: 'friendships#getFriendshipsPerUser'
 get '/friendships/getFriendshipsPerUser/:id', to: 'friendships#getFriendshipsPerUser'
 
