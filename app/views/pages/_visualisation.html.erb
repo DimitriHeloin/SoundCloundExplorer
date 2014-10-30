@@ -548,7 +548,7 @@ $.ajax({
 
 $.ajax({
 
-                                     url: "/friendships/getFriendshipsPerUser/6", // Route to the Script Controller method
+                                     url: "/friendships/getFriendshipsPerUser/"+<%=@current_user.id%>, // Route to the Script Controller method
                                      type: "GET",
                                      dataType: "json",
                                      data:{id_donne: <%=@current_user.id%>} ,
