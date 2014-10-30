@@ -17,6 +17,7 @@ get 'application/changeRoot'
 
 
 get '/users/show/:id', to: 'users#show'
+get '/users/:id', to: 'friendships#getFriendshipsPerUser'
 get '/friendships/getFriendshipsPerUser/:id', to: 'friendships#getFriendshipsPerUser'
 
 resources :followings,  only: [:index]
