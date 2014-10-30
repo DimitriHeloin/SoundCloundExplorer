@@ -68,7 +68,9 @@
                         data: { id_donne:  <%=@current_user.uid%>}, // This goes to Controller in params hash, i.e. params[:file_name]
                         complete: function() {},
                         success: function(data2, textStatus, xhr) {},
-                        error: function() {alert("Ajax error!")}
+                        error: function() {
+                          // alert("Ajax error!")
+                        }
                       }); 
 
               console.log("ayé données récupérées");
@@ -79,7 +81,9 @@
               $("#buttonMoi").show();
               $("#search-text").val("");
             },
-            error: function() {alert("Ajax error!");}
+            error: function() {
+              // alert("Ajax error!");
+            }
                                    
       });
 }$("#tabsWithStyle").tabs();
@@ -211,7 +215,7 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
 
                                     },
                                     error: function() {
-                                      alert("Ajax error!")
+                                      // alert("Ajax error!")
                                     }
                                   }); 
                                       console.log("ayé données récupérées");
@@ -226,7 +230,7 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
 
                                     },
                                     error: function() {
-                                      alert("Ajax error!")
+                                      // alert("Ajax error!")
                                     }
                                   }); 
 
@@ -287,7 +291,7 @@ $("#buttonMoi").click(function(){
 
                                     },
                                     error: function() {
-                                      alert("Ajax error!")
+                                      // alert("Ajax error!")
                                     }
                                   }); 
 });
@@ -345,7 +349,7 @@ $("#followbutton").click(function(){
                     // Make sure that the node being added to is expanded so user can see added node is correctly moved
                   },
                   error: function() {
-                    alert("Ajax error!")
+                    // alert("Ajax error!")
                   }
                 }); 
 }
@@ -388,7 +392,7 @@ if($(this).html()=="Following")
 
                     },
                     error: function() {
-                      alert("Ajax error!")
+                      // alert("Ajax error!")
                     }
                   }); 
 }
@@ -484,7 +488,7 @@ if($(this).html()=="Following")
 
                             },
                             error: function() {
-                              alert("Ajax error!")
+                              // alert("Ajax error!")
                             }
                           }); 
 $.ajax({
@@ -542,7 +546,7 @@ $.ajax({
 
                             },
                             error: function() {
-                              alert("Ajax error!")
+                              // alert("Ajax error!")
                             }
                           }); 
 
