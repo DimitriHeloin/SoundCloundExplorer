@@ -5,6 +5,7 @@ Deviseomn::Application.routes.draw do
   get "/" => "pages#home", as: "root"
   get '/auth/:provider', to: 'pages#create_soundcloud'
   get '/auth/:provider/callback', to: 'pages#create_soundcloud'
+  get '/auth/soundcloud/callback', to:'pages#create_soundcloud'
   get 'auth/:provider/back', to: 'pages#create_client'
 
 get 'application/urltracks'
