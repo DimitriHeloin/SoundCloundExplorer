@@ -279,6 +279,7 @@
                               $loadFollow=false;
 
                               console.log("ayé données");
+                              console.log(data);
                                listNodes=flatten(root);            
                               var listeId=[];
                               var valeurEnTrop=[];
@@ -338,7 +339,6 @@ error: function() {
 });
 }
 $.ajax({
-
                              url: "/application/urllikes", // Route to the Script Controller method
                              type: "GET",
                              dataType: "json",
@@ -349,9 +349,42 @@ $.ajax({
                               ) {},
                             success: function(data, textStatus, xhr) {
                               $("#likes-list").empty();
+                              console.log(data);
                               for(var index =0;index<data["children"].length;index++)
                               {
-                                 $('#likes-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="playcount"><p>'+data["children"][index].playback_count+'</p></div><div class="likescount"><p>'+data["children"][index].favoritings_count+'</p></li>');
+                                var long_playcount=data["children"][index].playback_count;
+                                var long_likecount=data["children"][index].favoritings_count;
+                                var short_playcount=long_playcount;
+                                var short_likecount=long_likecount;
+                                var thousands=0;
+                                var hundreds=0;
+
+                                if(long_playcount>1000)
+                                {
+                                    thousands=Math.floor(long_playcount/1000);
+                                    hundreds=Math.floor((long_playcount%1000)/100);
+
+                                    if(hundreds>500)
+                                    {
+                                      thousands++;
+                                    }
+                                    short_playcount=""+thousands+"k";
+
+                                }
+
+                                if(long_likecount>1000)
+                                {
+                                    thousands=Math.floor(long_likecount/1000);
+                                    hundreds=Math.floor((long_likecount%1000)/100);
+
+                                    if(hundreds>500)
+                                    {
+                                      thousands++;
+                                    }
+                                    short_likecount=""+thousands+"k";
+                                    
+                                }
+                                 $('#likes-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="stat_track"><div class="play"><div class="playarrow"></div><div class="playcount"><p>'+short_playcount+'</p></div></div><div class="like"><div class="likeheart"></div><div class="likescount"><p>'+short_likecount+'</p></div></div></li>');
 
                               }
                             },
@@ -374,7 +407,39 @@ $.ajax({
                               $("#track-list").empty();
                               for(var index =0;index<data["children"].length;index++)
                               {
-                                 $('#track-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="playcount"><p>'+data["children"][index].playback_count+'</p></div><div class="likescount"><p>'+data["children"][index].favoritings_count+'</p></li>');
+                                var long_playcount=data["children"][index].playback_count;
+                                var long_likecount=data["children"][index].favoritings_count;
+                                var short_playcount=long_playcount;
+                                var short_likecount=long_likecount;
+                                var thousands=0;
+                                var hundreds=0;
+
+                                if(long_playcount>1000)
+                                {
+                                    thousands=Math.floor(long_playcount/1000);
+                                    hundreds=Math.floor((long_playcount%1000)/100);
+
+                                    if(hundreds>500)
+                                    {
+                                      thousands++;
+                                    }
+                                    short_playcount=""+thousands+"k";
+
+                                }
+
+                                if(long_likecount>1000)
+                                {
+                                    thousands=Math.floor(long_likecount/1000);
+                                    hundreds=Math.floor((long_likecount%1000)/100);
+
+                                    if(hundreds>500)
+                                    {
+                                      thousands++;
+                                    }
+                                    short_likecount=""+thousands+"k";
+                                    
+                                }
+                                 $('#track-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="stat_track"><div class="play"><div class="playarrow"></div><div class="playcount"><p>'+short_playcount+'</p></div></div><div class="like"><div class="likeheart"></div><div class="likescount"><p>'+short_likecount+'</p></div></div></li>');
 
                               }
 

@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   def home
   	if current_user
     	@client=Soundcloud.new(:access_token => current_user.authentification_token)
-      page_size=10000
+      page_size=200
   		@list_followings=@client.get("/me/followings",:limit=>page_size).to_json
        @soundclound_target=@list_followings
 

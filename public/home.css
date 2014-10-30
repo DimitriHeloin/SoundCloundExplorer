@@ -1,5 +1,9 @@
 @media (min-width: 300px) {
 
+ul
+{
+	padding:0px;
+}
 	#mainWindow{
 		position:relative;
 		width: 100%;
@@ -368,26 +372,52 @@ body.loadingTracks #loadTracks {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	margin-right: 5%;
+	padding-right: 
+
 
 }
 .titreTrack p{
-	display: table-cell;
 	height: 30px;
+	display: table-cell;
+
 	vertical-align: middle;
 	text-align:right;
+	position: relative;
+	float: left;
 
 
 }
+
+
+
+.stat_track{
+	position: relative;
+	float: right;
+	width: 30%;
+	height: 30px;
+}
+.play{
+	width: 48%;
+	height: 100%;
+	position: relative;
+	float: left;
+}
+.like{
+	width: 48%;
+	height: 100%;
+	position: relative;
+	float: right;
+}
+
 .playcount{
 	position: relative;
 	float: left;
-	width: 20%;
-	height: 30px;
+	width: 25%;
+	height: 100%;
 	font-size: 0.8em;
 	text-align:left;
-	height: 30px;
 	display:table;
-	text-align:right;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -398,25 +428,35 @@ body.loadingTracks #loadTracks {
 .playcount p{
 	display: table-cell;
 	vertical-align: middle;
-	padding-right: 24px;
-
 
 }
-.playcount p:after{
-	content: "";
-	background: url("playicon.png") no-repeat;
+.playarrow{
+	background: url("playicon.svg") no-repeat;
+
 	background-size: 100%;
-	width: 20px;
-	height: 80%;
-	position: absolute;
-	right: 2px;
+	width: 16px;
+	height: 100%;
+	position: relative;
+	float: left;
+	margin-top: 5px;
+}
+
+.likeheart{
+	background: url("likeicon.png") no-repeat;
+
+	background-size: 100%;
+	width: 16px;
+	height: 100%;
+	position: relative;
+	float: left;
+	margin-top: 5px;
 }
 
 .likescount{
 	position: relative;
 	float: left;
-	width: 20%;
-	height: 30px;
+	width: 25%;
+	height: 100%;
 	font-size: 0.8em;
 		display:table;
 	text-align:right;
@@ -427,20 +467,11 @@ body.loadingTracks #loadTracks {
 }
 .likescount p{
 	display: table-cell;
-	vertical-align: middle;	height: 30px;
-		padding-right: 24px;
+	vertical-align: middle;	
 
 
 }
-.likescount p:after{
-	content: "";
-	background: url("likeicon.png") no-repeat;
-	background-size: 100%;
-	width: 20px;
-	height: 80%;
-	position: absolute;
 
-}
 
 .track_li{
 	width: 100%;
@@ -457,27 +488,24 @@ body.loadingTracks #loadTracks {
 {
 	width: 100%;
 	margin: 0px;
-	padding-left: 5px;
-	padding-right: 5px;
-/*	padding: 14px;
-*/
+
+	padding-right: 14px;
+
 }
 #track-list
 {
 	width: 100%;
 	margin: 0px;
-		padding-left: 5px;
-		padding-right: 5px;
 
-/*	padding: 14px;
-*/
+
+	padding-right: 14px;
+
 }
 
 #my-friends-list{
 		width: 100%;
 		margin: 0px;
-		padding-left: 5px;
-		padding-right: 5px;
+		padding:5px;
 }
 .friend_li{
 	width: 120px;
