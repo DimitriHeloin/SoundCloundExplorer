@@ -5,32 +5,28 @@
 <head>
   <meta charset="utf-8">
   <title>Force-Directed Graph</title>
-  <link rel="stylesheet" type="text/css" href="home.css">
 
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-  <link rel="stylesheet" type="text/css" href="jqueryui.css">
   <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,700' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script type="text/javascript" src="jquery.scrollabletab.js"></script>
-  <script src="plusTabs.js"></script>
 
   <script src="//connect.soundcloud.com/sdk.js"></script>
   <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "application"%>
   <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-  <script>//document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
   <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="http://w.soundcloud.com/player/api.js"></script>
 <link rel="stylesheet" href="jquery.mCustomScrollbar.css" />
 <script src="jquery.mCustomScrollbar.concat.min.js"></script>
+
 <script type="text/javascript">
   $valeur_id_client=<%=current_user.uid%>
 </script>
  
 </head>
 
-<div id="buttonShowNav"></div>
 <div id="mainWindow">
 
   <div id="Search">

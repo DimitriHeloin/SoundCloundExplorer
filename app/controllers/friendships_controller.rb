@@ -50,6 +50,10 @@ class FriendshipsController < ApplicationController
         
         @friendship = current_user.friendships.build(:friend_id=>User.where(uid: params[:friend_id]).take.id)
         if @friendship.save
+          @notif = Notification.new
+          @notif.user_id=User.where(uid: params[:friend_id]).take.id
+          @notif.content="L'utilisateur vous a ajouté en ami"
+          User.where(uid: params[:friend_id]).take.notifications << @notif
           respond_to do |format|
           format.html # show.html.erb
           format.json  { render :json => {result:true} }    end

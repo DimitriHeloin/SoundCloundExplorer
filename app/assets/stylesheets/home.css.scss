@@ -1,0 +1,463 @@
+body{
+		    overflow:hidden;
+}
+
+ #header{
+ 	width: 100%;
+ 	height: 4%;
+ }
+#header_application{
+	  top: 0px;
+
+}
+#div_notifications{
+	width: 100%;
+	height: 100%;
+}
+#show_notifications{
+	width: 350px;
+	height: auto;
+	background-color: #FFE9CE;
+	position: absolute;
+	top:52px;
+	display: none;
+}
+.contentApplication{
+
+	width:100%;
+	height:100%;
+	position: relative;
+}
+
+@media (min-width: 300px) {
+
+ul
+{
+	padding:0px;
+}
+	#mainWindow{
+		position:relative;
+		width: 100%;
+		height: 100%;
+		background-color:#EEE;
+
+	}
+	#viewWindow{
+		position: relative;
+		width: 100%;
+	}
+	#dataWindow{
+		position:relative;
+		float: left;
+		width: 30%;
+		height: 100%;
+		display: block;
+	}
+	#listViewTrack{
+		height: 60%;
+		width: 100%;
+	}
+	
+
+
+	#value{
+		width:100%;
+		height:40%;
+		background-color: white;
+		left: 0;
+		position: relative;
+	}
+
+	#previewGuy{
+		position: relative;
+		width: 100%;
+		height: 70%;
+	}
+	#image{
+		position: relative;
+		float: left;
+		padding-left: 1%;
+		padding-top: 1%;
+		width:50%;
+		height:100%;
+		background-repeat: no-repeat;
+		background-size:contain;
+	}
+	#infos{
+		position: relative;
+		float: left;
+		width: 50%;
+		height: 100%;
+	}
+	#username{
+		font-size: 1.3em;
+		font-family: 'PT Serif', serif;
+		font-weight:bold;
+		width: 80%;
+		position: relative;
+		left: 10%;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		background-color: #EEE;
+	}
+	#full_name{
+		left: 10%;
+		font-size: 0.7em;
+		width: 80%;
+		position: relative;
+		left: 10%;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		background-color: #EEE;
+	}
+	#city{
+		left: 10%;
+		position: relative;
+
+	}
+	#country{
+		left: 10%;
+		position: relative;
+
+	}
+	#test{
+		width: 100%;
+		height: 100%;
+		padding-top: 5%;
+	}
+	#stats{
+
+		position: relative;
+		width: 100%;
+		height: 30%;
+		display: inline-block;
+	}
+	#followers{
+		width: 20%;
+		position: relative;
+		float: left;
+		padding-left: 30px;
+		display:table-cell;
+	text-align:right;
+	vertical-align: center;
+		white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	}
+
+
+	#followers:before{
+		content: "";
+		background: url("followers.png") no-repeat;
+		background-size: 100%;
+		width: 20px;
+		height: 80%;
+		position: absolute;
+		left: 5px;
+
+	}
+	#following{	
+		width: 20%;
+		position: relative;
+		float: left;
+		padding-left: 50px;
+		display:table;
+	text-align:right;
+		white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	}
+	#following:before{
+		content: "";
+		background: url("following.png") no-repeat;
+		background-size: 100%;
+		width: 20px;
+		height: 80%;
+		position: absolute;
+		left: 25px;
+
+	}
+	#tracksNumber{
+		width: 20%;
+		padding-left: 10px;
+		position: relative;
+		float: left;
+		padding-left: 35px;
+		display:table;
+	text-align:right;
+		white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	}
+	#tracksNumber:before{
+		content: "";
+		background: url("tracks.png") no-repeat;
+		background-size: 100%;
+		width: 20px;
+		height: 80%;
+		left: -2px;
+		position: absolute;
+
+	}
+
+	#follow{
+		height: 100%;
+		width: 40%;
+		padding-left: 10px;
+		position: relative;
+		float: left;
+		padding:5px;
+	}
+
+	#followbutton{
+		width: 40%;
+		float: right;
+		margin-right: 1px;
+		padding-bottom: 5px;
+		color: black;
+	}
+
+#addfriendbutton{
+		width: 40%;
+		float: right;
+		margin-right: 1px;
+		padding-bottom: 5px;
+		color: black;
+	}
+
+
+
+
+	.player{
+
+		position: relative;
+		width: 100%;
+	}
+	#tree-container{
+		position: relative;
+		float: left;
+		width: 70%;
+		height: 100%;
+	}
+
+
+
+
+	.node {
+		cursor: pointer;
+	}
+
+	.overlay{
+		background-color:#EEE;
+	}
+
+	.node circle {
+		fill: #fff;
+		stroke: #FF9531;
+		stroke-width: 1.5px;
+	}
+
+	.node text {
+		font-size:10px; 
+		font-family:sans-serif;
+	}
+
+	.link {
+		fill: none;
+		stroke: #ccc;
+		stroke-width: 1.5px;
+	}
+
+	.templink {
+		fill: none;
+		stroke: red;
+		stroke-width: 3px;
+	}
+
+	.ghostCircle.show{
+		display:block;
+	}
+
+	.ghostCircle, .activeDrag .ghostCircle{
+		display: none;
+	}
+	.ui-content {
+		padding: 10px ;
+	}
+
+	.ui-listview {
+		margin: 10px ;
+	}
+
+
+
+
+
+
+
+
+
+	#Search{
+		position: absolute;
+		top: 20px;
+		left:35%;
+		z-index: 10;
+		display: inline-block;
+		height: 60px;
+
+	}
+	#search-text{
+		position: relative;
+		float: left;
+		width: 200px;
+		height: 30px;
+
+	}
+	#buttonMoi
+	{
+		position: relative;
+		float:right;
+		width: 50px;
+		height: 30px;
+	}
+	#search-result{
+		position: absolute;
+		bottom: 0;}
+
+
+	}
+
+	#loadFollowers {
+		display:    none;
+		position:   absolute;
+		z-index:    1000;
+		bottom:        50px;
+		left:       50px;
+		height:     15px;
+		width:      128px;
+		background:url("ajax-loader.gif") 
+		100% 100% 
+		no-repeat;
+	}
+
+	body.loadingFollowers #loadFollowers {
+		display: block;
+	}
+	#loadTracks {
+		display:    none;
+		position:   absolute;
+		z-index:    1000;
+		top:        0;
+		left:       0;
+		height:     100%;
+		width:      100%;
+		background: rgba( 255, 255, 255, .8 ) 
+		url("ajax-loader.gif") 
+		50% 50% 
+		no-repeat;
+	}
+	#loadSearch {
+		display:    none;
+		position:   absolute;
+		z-index:    1000;
+		top:        50px;
+		right:       50px;
+		height:     100%;
+		width:      100%;
+		background:
+		url("ajax-loader.gif")  
+		no-repeat;
+	}
+
+/* When the body has the loading class, we turn
+the scrollbar off with overflow:hidden */
+body.loadingSearch #loadSearch {
+	display: block;
+}
+
+/* Anytime the body has the loading class, our
+modal element will be visible */
+body.loadingTracks #loadTracks {
+	display: block;
+}
+
+
+
+#likes-list
+{
+	width: 100%;
+	margin: 0px;
+
+	padding-right: 14px;
+
+}
+#track-list
+{
+	width: 100%;
+	margin: 0px;
+
+
+	padding-right: 14px;
+
+}
+
+#my-friends-list{
+		width: 100%;
+		margin: 0px;
+		padding:5px;
+}
+.friend_li{
+	width: 120px;
+	height: 120px;
+	padding: 1px;
+	float: left;
+	border:solid;
+	border-width:1px;
+	border-color: #EAEAEA;
+}
+.previewFriend{
+	width: 100%;
+	height: 100%;
+}
+
+	
+
+
+
+#tabsWithStyle{
+			white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 100%;
+}
+#mytabs{
+	display: inline-block;
+	height: 75px;
+	position: relative;
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+#tabsWithStyle ul
+{
+	list-style-type: none;
+
+}
+
+.tabFriends {float:right!important;}
+
+
+
+
+@media (max-width: 300px)  {
+	#mainWindow{
+		position:relative;
+		width: 100%;
+		height: 100%;
+		background-color:#fff;
+
+		}}

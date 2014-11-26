@@ -8,7 +8,7 @@ gem 'binding_of_caller'
 gem 'd3_rails'
 gem 'json'
 gem 'pry'
-
+gem 'unread'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
