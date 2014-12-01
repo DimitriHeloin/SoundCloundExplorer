@@ -75,8 +75,24 @@ class NotificationsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json  { render :json => {children:@notifications} }    end
-      
+  end
 
+  def getReadNotifications
+    @notifications=[]
+    @allUnreadNotifications=Notification.unread_by(current_user)
+
+    Notification.all.each do |t|
+      if t.user_id==current_user.id
+        @notifications.push(t)
+      else
+      end
+    end
+
+    @readNotifications=@notifications.reject{ |e| @allUnreadNotifications.include? e }
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json  { render :json => {children:@readNotifications} }    end
   end
 
   private

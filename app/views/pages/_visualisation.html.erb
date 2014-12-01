@@ -1,15 +1,15 @@
   <div id="dataWindow">
-      <div id="value">
-        <div id="previewGuy">
-          <div id="image"></div>
-          <div id="infos">
-            <div id="username"></div>
-            <div id="full_name"></div>
-            <div id="city"></div>
-            <div id="country"></div>
-          </div>
-        </div> 
-        <div id="stats">
+    <div id="value">
+      <div id="previewGuy">
+        <div id="image"></div>
+        <div id="infos">
+          <div id="username"></div>
+          <div id="full_name"></div>
+          <div id="city"></div>
+          <div id="country"></div>
+        </div>
+      </div> 
+      <div id="stats">
         <div id="test">
           <div id="followers"></div>
           <div id="following"></div>
@@ -17,41 +17,41 @@
           <div id="follow">
             <button type="button" idToFollow="" class="btn btn-default" id="followbutton">Follow</button>
             <button type="button" idToAdd="" class = "btn btn-default" id="addfriendbutton"> Add Friend</button>
-            </div>
           </div>
         </div>
       </div>
-      <div id="listViewTrack" >
+    </div>
+    <div id="listViewTrack" >
 
       <div id="tabsWithStyle" class="style-tabs">
-      <ul id="mytabs">
-        <li><a href="#tracks"><div class="icon tracks-icon">Tracks</div></a></li>
-        <li><a href="#likes"><div class="icon likes-icon">Likes</div></a></li>
-        <li><a href="#playlists"><div class="icon playlists-icon">Playlists</div></a></li>
-        <li><a href="#user-friends"><div class="icon user-friends-icon">Friends</div></a></li>
-        <li class="tabFriends"><a href="#my-friends"><div class="icon my-friends-icon">My Friends</div></a></li>
-      </ul>
-      <div id="tracks">
-        <ul data-role="listview"  id="track-list" data-theme="a">
-      </div>
-      <div id="likes">
-        <ul data-role="listview"  id="likes-list" data-theme="a">
-      </div>
-      <div id="playlists">
-        <ul data-role="listview"  id="playlists-list" data-theme="a">
-      </div>
-      <div id="user-friends">
-        <ul data-role="listview"  id="user-friends-list" data-theme="a">
-      </div>
-      <div id="my-friends">
-        <ul data-role="listview"  id="my-friends-list" data-theme="a">
-      </div>
-      
-    </div>
-    <script type="text/javascript">
-      function changeRoot(id_donne)
-      {
-        $.ajax({
+        <ul id="mytabs">
+          <li><a href="#tracks"><div class="icon tracks-icon">Tracks</div></a></li>
+          <li><a href="#likes"><div class="icon likes-icon">Likes</div></a></li>
+          <li><a href="#playlists"><div class="icon playlists-icon">Playlists</div></a></li>
+          <li><a href="#user-friends"><div class="icon user-friends-icon">Friends</div></a></li>
+          <li class="tabFriends"><a href="#my-friends"><div class="icon my-friends-icon">My Friends</div></a></li>
+        </ul>
+        <div id="tracks">
+          <ul data-role="listview"  id="track-list" data-theme="a">
+          </div>
+          <div id="likes">
+            <ul data-role="listview"  id="likes-list" data-theme="a">
+            </div>
+            <div id="playlists">
+              <ul data-role="listview"  id="playlists-list" data-theme="a">
+              </div>
+              <div id="user-friends">
+                <ul data-role="listview"  id="user-friends-list" data-theme="a">
+                </div>
+                <div id="my-friends">
+                  <ul data-role="listview"  id="my-friends-list" data-theme="a">
+                  </div>
+
+                </div>
+                <script type="text/javascript">
+                  function changeRoot(id_donne)
+                  {
+                    $.ajax({
 
             url: "/application/changeRoot", // Route to the Script Controller method
             type: "GET",
@@ -59,8 +59,8 @@
             data: { id_donne:  id_donne}, // This goes to Controller in params hash, i.e. params[:file_name]
             complete: function() {},
             success: function(data, textStatus, xhr) {
-                  $myJson=data;
-                  $.ajax({
+              $myJson=data;
+              $.ajax({
 
                         url: "/followings", // Route to the Script Controller method
                         type: "GET",
@@ -84,20 +84,20 @@
             error: function() {
               // alert("Ajax error!");
             }
-                                   
-      });
+
+          });
 }
 
 $("#tabsWithStyle").tabs();
-    </script>
+</script>
 
 
 
-    </div>
-  </div>
+</div>
+</div>
 
 <script>
-$(window).resize(function(){
+  $(window).resize(function(){
     $height=$(window).height();
     $width=$(window).width();
     $("#viewWindow").height($height-100);
@@ -114,7 +114,7 @@ $(window).resize(function(){
   $loadTracks=false;
   $loadSearch=false;
 
-$(document).on({
+  $(document).on({
     ajaxStart: function() { 
       if($loadFollow==true){
         $body.addClass("loadingFollowers")
@@ -123,21 +123,22 @@ $(document).on({
       {
         $body.addClass("loadingTracks");
       }
-       if($loadSearch==true)
+      if($loadSearch==true)
       {
         $body.addClass("loadingSearch");
       }    
     },
-     ajaxStop: function() {
+    ajaxStop: function() {
       $body.removeClass("loadingFollowers");
       $body.removeClass("loadingTracks"); 
       $body.removeClass("loadingSearch"); 
     }    
-});
-              
-  $(document).ready(function() {
-    $DivNotificationOuvert=false;
+  });
 
+  $(document).ready(function() {
+    $premierClicDivNotificationFait=false;
+    $DivNotificationOuvert=false;
+    $numberUnreadNotif=0;
     $requests=[];
     $arrayvaleurmyfriends=[];
     $friend_image_url=null;
@@ -176,7 +177,7 @@ $(document).on({
                                       $("#search-result").empty();  
 
                                       $('#search-result').append('<li style="cursor:pointer;" id="resultatRecherche" idguy='+data["children"].id+' ">'+data["children"].username+'</li>');
-                                        $loadSearch=false;
+                                      $loadSearch=false;
 
 
                                     },
@@ -187,24 +188,24 @@ $(document).on({
 
 });
 
- $.ajax({
+  $.ajax({
 
             url: "/notifications/getUnreadNotifications/", // Route to the Script Controller method
             type: "POST",
             dataType: "json",
             complete: function() {},
             success: function(data, textStatus, xhr) {
-              console.log(data);
+              $numberUnreadNotif=data.children.length;
               $("#numberUnreadNotif").text(data.children.length);
             },
             error: function() {
               // alert("Ajax error!");
             }
-                                   
-      });
 
-$( "#search-result" ).on("click","li#resultatRecherche", function(event) {    
-  $.ajax({
+          });
+
+  $( "#search-result" ).on("click","li#resultatRecherche", function(event) {    
+    $.ajax({
 
                                      url: "/application/changeRoot", // Route to the Script Controller method
                                      type: "GET",
@@ -216,7 +217,7 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
                                       ) {},
                                     success: function(data, textStatus, xhr) {
                                       $myJson=data;
-                                        $.ajax({
+                                      $.ajax({
 
                                      url: "/followings", // Route to the Script Controller method
                                      type: "GET",
@@ -229,7 +230,7 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
                                     success: function(data2, textStatus, xhr) {
                                       // console.log(data2);
                                       
-                                     
+
 
 
 
@@ -257,37 +258,37 @@ $( "#search-result" ).on("click","li#resultatRecherche", function(event) {
 });
 
 
-initiategraph();
+  initiategraph();
 
-$height=$(window).height();
-$width=$(window).width();
-$("#viewWindow").height($height-100);
-$("#viewWindow").width($width);
-var viewerWidth = $("#tree-container").width();
-var viewerHeight = $("#tree-container").height();
- 
-$myJson=  <%=raw '{ "children":'%><%=raw @list_followings%><%= raw  '
-, "id":'%><%=raw @current_user.uid%><%= raw  ',
-"kind":"user",
-"permalink":"'%><%=raw @client.get('/me').permalink%><%=raw'",
-"avatar_url":"'%><%=raw @client.get('/me').avatar_url%><%=raw'",
-"followings_count":'%><%=raw @client.get('/me').followings_count%><%=raw',
-"followers_count":'%><%=raw @client.get('/me').followers_count%><%=raw',
-"description":"'%><%= raw @client.get('/me').description%><%=raw'",
-"username":"'%><%= raw @client.get('/me').username%><%=raw'"  }'%>;
+  $height=$(window).height();
+  $width=$(window).width();
+  $("#viewWindow").height($height-100);
+  $("#viewWindow").width($width);
+  var viewerWidth = $("#tree-container").width();
+  var viewerHeight = $("#tree-container").height();
 
-
-$myFollowList=<%=raw @list_followings%>;
-
-treeData=$myJson;
-$("#follow").hide();
-$("#followers").hide();
-$("#following").hide();
-$("#tracksNumber").hide();
+  $myJson=  <%=raw '{ "children":'%><%=raw @list_followings%><%= raw  '
+  , "id":'%><%=raw @current_user.uid%><%= raw  ',
+  "kind":"user",
+  "permalink":"'%><%=raw @client.get('/me').permalink%><%=raw'",
+  "avatar_url":"'%><%=raw @client.get('/me').avatar_url%><%=raw'",
+  "followings_count":'%><%=raw @client.get('/me').followings_count%><%=raw',
+  "followers_count":'%><%=raw @client.get('/me').followers_count%><%=raw',
+  "description":"'%><%= raw @client.get('/me').description%><%=raw'",
+  "username":"'%><%= raw @client.get('/me').username%><%=raw'"  }'%>;
 
 
-$("#buttonMoi").click(function(){
-  $.ajax({
+  $myFollowList=<%=raw @list_followings%>;
+
+  treeData=$myJson;
+  $("#follow").hide();
+  $("#followers").hide();
+  $("#following").hide();
+  $("#tracksNumber").hide();
+
+
+  $("#buttonMoi").click(function(){
+    $.ajax({
 
                                      url: "/application/changeRoot", // Route to the Script Controller method
                                      type: "GET",
@@ -317,11 +318,11 @@ $("#buttonMoi").click(function(){
 
 
 
-$("#followbutton").click(function(){
-  if($(this).html()=="Follow")
-  {
+  $("#followbutton").click(function(){
+    if($(this).html()=="Follow")
+    {
 
-    $.ajax({
+      $.ajax({
 
                                      url: "/application/ajouteFollow", // Route to the Script Controller method
                                      type: "GET",
@@ -399,18 +400,18 @@ if($(this).html()=="Following")
 }
 
 });$("#addfriendbutton").click(function(){
-    $idtoadd=$(this).attr("idtoadd");
-    $.ajax({
+  $idtoadd=$(this).attr("idtoadd");
+  $.ajax({
 
-                                     url: "/friendships/", 
-                                     type: "POST",
-                                     dataType: "json",
-                                    data: { friend_id: $idtoadd}, 
-                                    complete: function(
+   url: "/friendships/", 
+   type: "POST",
+   dataType: "json",
+   data: { friend_id: $idtoadd}, 
+   complete: function(
 
 
-                                      ) {},
-                                    success: function(data, textStatus, xhr) {
+    ) {},
+   success: function(data, textStatus, xhr) {
                                       // console.log(data);
                                       if(data.result==true)
                                       {
@@ -418,10 +419,10 @@ if($(this).html()=="Following")
                                       }
                                       else
                                         alert("l'utilisateur n'est pas inscrit sur soundcloud explorer, parlez lui de l'application pour qu'il s'inscrive blablabla")
-                  },
-                  error: function() {
-                  }
-                }); 
+                                    },
+                                    error: function() {
+                                    }
+                                  }); 
 
 });
 
@@ -459,31 +460,31 @@ if($(this).html()=="Following")
 
                                 if(long_playcount>1000)
                                 {
-                                    thousands=Math.floor(long_playcount/1000);
-                                    hundreds=Math.floor((long_playcount%1000)/100);
+                                  thousands=Math.floor(long_playcount/1000);
+                                  hundreds=Math.floor((long_playcount%1000)/100);
 
-                                    if(hundreds>500)
-                                    {
-                                      thousands++;
-                                    }
-                                    short_playcount=""+thousands+"k";
+                                  if(hundreds>500)
+                                  {
+                                    thousands++;
+                                  }
+                                  short_playcount=""+thousands+"k";
 
                                 }
 
                                 if(long_likecount>1000)
                                 {
-                                    thousands=Math.floor(long_likecount/1000);
-                                    hundreds=Math.floor((long_likecount%1000)/100);
+                                  thousands=Math.floor(long_likecount/1000);
+                                  hundreds=Math.floor((long_likecount%1000)/100);
 
-                                    if(hundreds>500)
-                                    {
-                                      thousands++;
-                                    }
-                                    short_likecount=""+thousands+"k";
-                                    
+                                  if(hundreds>500)
+                                  {
+                                    thousands++;
+                                  }
+                                  short_likecount=""+thousands+"k";
+
                                 }
 
-                               $('#track-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="stat_track"><div class="play"><div class="playarrow"></div><div class="playcount"><p>'+short_playcount+'</p></div></div><div class="like"><div class="likeheart"></div><div class="likescount"><p>'+short_likecount+'</p></div></div></li>');
+                                $('#track-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="stat_track"><div class="play"><div class="playarrow"></div><div class="playcount"><p>'+short_playcount+'</p></div></div><div class="like"><div class="likeheart"></div><div class="likescount"><p>'+short_likecount+'</p></div></div></li>');
 
                               }
 
@@ -492,7 +493,7 @@ if($(this).html()=="Following")
                               // alert("Ajax error!")
                             }
                           }); 
-$.ajax({
+  $.ajax({
 
                              url: "/application/urllikes", // Route to the Script Controller method
                              type: "GET",
@@ -517,28 +518,28 @@ $.ajax({
 
                                 if(long_playcount>1000)
                                 {
-                                    thousands=Math.floor(long_playcount/1000);
-                                    hundreds=Math.floor((long_playcount%1000)/100);
+                                  thousands=Math.floor(long_playcount/1000);
+                                  hundreds=Math.floor((long_playcount%1000)/100);
 
-                                    if(hundreds>500)
-                                    {
-                                      thousands++;
-                                    }
-                                    short_playcount=""+thousands+"k";
+                                  if(hundreds>500)
+                                  {
+                                    thousands++;
+                                  }
+                                  short_playcount=""+thousands+"k";
 
                                 }
 
                                 if(long_likecount>1000)
                                 {
-                                    thousands=Math.floor(long_likecount/1000);
-                                    hundreds=Math.floor((long_likecount%1000)/100);
+                                  thousands=Math.floor(long_likecount/1000);
+                                  hundreds=Math.floor((long_likecount%1000)/100);
 
-                                    if(hundreds>500)
-                                    {
-                                      thousands++;
-                                    }
-                                    short_likecount=""+thousands+"k";
-                                    
+                                  if(hundreds>500)
+                                  {
+                                    thousands++;
+                                  }
+                                  short_likecount=""+thousands+"k";
+
                                 }
                                 $('#likes-list').append('<li class="track_li" style="cursor:pointer;" linkPlayer="'+data["children"][index].uri+'"><div class="titreTrack"><p>'+data["children"][index].title+'</p></div><div class="stat_track"><div class="play"><div class="playarrow"></div><div class="playcount"><p>'+short_playcount+'</p></div></div><div class="like"><div class="likeheart"></div><div class="likescount"><p>'+short_likecount+'</p></div></div></li>');
 
@@ -551,28 +552,28 @@ $.ajax({
                             }
                           }); 
 
-$.ajax({
+  $.ajax({
 
                                      url: "/friendships/getFriendshipsPerUser/"+<%=@current_user.id%>, // Route to the Script Controller method
                                      type: "GET",
                                      dataType: "json",
                                      data:{id_donne: <%=@current_user.id%>} ,
-                                    complete: function() {},
-                                    success: function(data, textStatus, xhr) {
+                                     complete: function() {},
+                                     success: function(data, textStatus, xhr) {
                                       $donneesfriends=data;
                                       for(var index=0;index<data["children"].length;index++)
                                       {
                                         // $arrayvaleurmyfriends.push(data["children"][index]["friend_id"]);
-                                           $.ajax({
-                                            url:"/users/show/"+data["children"][index].friend_id,
-                                            type :"GET",
-                                            dataType: "json",
-                                            data:{id_donne: data["children"][index].friend_id},
-                                            complete: function(){},
-                                            success: function(data, textStatus, xhr){
-                                              $compteurFriends++;
-                                              var friend_id=$donneesfriends["children"][$compteurFriends-1].friend_id;
-                                              $friend_image_url=null;
+                                        $.ajax({
+                                          url:"/users/show/"+data["children"][index].friend_id,
+                                          type :"GET",
+                                          dataType: "json",
+                                          data:{id_donne: data["children"][index].friend_id},
+                                          complete: function(){},
+                                          success: function(data, textStatus, xhr){
+                                            $compteurFriends++;
+                                            var friend_id=$donneesfriends["children"][$compteurFriends-1].friend_id;
+                                            $friend_image_url=null;
 
 
                                             $.ajax({
@@ -581,44 +582,38 @@ $.ajax({
                                                  type: "GET",
                                                  dataType: "json",
                                                  data:{id_donne: friend_id} ,
-                                                complete: function(data, textStatus, xhr) {},
-                                                success: function(data, textStatus, xhr) {
+                                                 complete: function(data, textStatus, xhr) {},
+                                                 success: function(data, textStatus, xhr) {
                                                   console.log("data ami");
                                                   // console.log(data);
                                                   $friend_image_url=data["children"][0].image_url;
-                                                   $('#my-friends-list').append('<li class="friend_li" style="cursor:pointer;" onclick="changeRoot('+data["children"][0].uid+')"><div class="previewFriend" id="my-friends-list-'+friend_id+'" id_friend='+friend_id+'></div></li>');
+                                                  $('#my-friends-list').append('<li class="friend_li" style="cursor:pointer;" onclick="changeRoot('+data["children"][0].uid+')"><div class="previewFriend" id="my-friends-list-'+friend_id+'" id_friend='+friend_id+'></div></li>');
 
-                                                $('#my-friends-list-'+friend_id).css("background-image","url("+$friend_image_url+")");
+                                                  $('#my-friends-list-'+friend_id).css("background-image","url("+$friend_image_url+")");
 
                                                 },
                                                 error: function(){}
                                               });
 
-                                               
 
 
-                                            },
-                                            error: function(){console.log("attends gros");}
-                                          });
-                                       }
-                                    },
-                                    error: function() { console.log("fail") }
-                                  }); 
+
+},
+error: function(){console.log("attends gros");}
+});
+}
+},
+error: function() { console.log("fail") }
+}); 
 
 
 });
 
   $("#div_notifications").click(function(){
-    console.log("clic bouton notification");
-    if($DivNotificationOuvert==false)
+    if ($premierClicDivNotificationFait==false) 
     {
-      $DivNotificationOuvert=true;
-
-      $("#show_notifications").show();
-      $("#list_notifications").empty();
-
-      $.ajax({
-
+      if ($numberUnreadNotif>0) {
+        $.ajax({
             url: "/notifications/getUnreadNotifications/", // Route to the Script Controller method
             type: "POST",
             dataType: "json",
@@ -631,11 +626,41 @@ $.ajax({
             error: function() {
               // alert("Ajax error!");
             }
-                                   
-      });
-
-    }
+          });
+      }
+      $.ajax({
+            url: "/notifications/getReadNotifications/", // Route to the Script Controller method
+            type: "POST",
+            dataType: "json",
+            complete: function() {},
+            success: function(data, textStatus, xhr) {
+              for(var i=0;i<data.children.length;i++){
+                $("#list_notifications").append("<li>"+data.children[i].content+"</li>")
+              }
+            },
+            error: function() {
+              // alert("Ajax error!");
+            }
+          });
+      
+      $premierClicDivNotificationFait=true;
+    }    
     else
-      $("show_notifications").hide();
+    {
+      if($DivNotificationOuvert==false)
+      {
+        $DivNotificationOuvert=true;
+
+        $("#show_notifications").css("display","block");
+        $("#list_notifications").empty();
+
+      }
+      else
+      {
+        $("#show_notifications").css("display","none");
+        $DivNotificationOuvert=false;
+
+      }
+    }
   });
-  </script>
+</script>

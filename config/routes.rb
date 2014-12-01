@@ -24,6 +24,7 @@ Deviseomn::Application.routes.draw do
 	get '/friendships/getFriendshipsPerUser/:id', to: 'friendships#getFriendshipsPerUser'
 
 	post 'notifications/getUnreadNotifications'
+	post 'notifications/getReadNotifications'
 
 end
 
