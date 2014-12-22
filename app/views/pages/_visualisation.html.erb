@@ -16,7 +16,7 @@
           <div id="tracksNumber"></div> 
           <div id="follow">
             <button type="button" idToFollow="" class="btn btn-default" id="followbutton">Follow</button>
-            <button type="button" idToAdd="" class = "btn btn-default" id="addfriendbutton"> Add Friend</button>
+            <button type="button" idToAdd="" class = "btn btn-default" id="addfriendbutton"> Add </button>
           </div>
         </div>
       </div>
@@ -457,7 +457,7 @@ if($(this).html()=="Following")
                                 var short_likecount=long_likecount;
                                 var thousands=0;
                                 var hundreds=0;
-
+                                cons
                                 if(long_playcount>1000)
                                 {
                                   thousands=Math.floor(long_playcount/1000);
@@ -584,8 +584,6 @@ if($(this).html()=="Following")
                                                  data:{id_donne: friend_id} ,
                                                  complete: function(data, textStatus, xhr) {},
                                                  success: function(data, textStatus, xhr) {
-                                                  console.log("data ami");
-                                                  // console.log(data);
                                                   $friend_image_url=data["children"][0].image_url;
                                                   $('#my-friends-list').append('<li class="friend_li" style="cursor:pointer;" onclick="changeRoot('+data["children"][0].uid+')"><div class="previewFriend" id="my-friends-list-'+friend_id+'" id_friend='+friend_id+'></div></li>');
 

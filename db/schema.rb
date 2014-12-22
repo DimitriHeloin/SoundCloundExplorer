@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20141112123731) do
     t.string   "username"
     t.string   "last_name"
     t.string   "provider"
-    t.string   "uid"
+    t.integer  "uid"
     t.string   "authentification_token"
     t.string   "image_url"
   end
