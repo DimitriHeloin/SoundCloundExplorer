@@ -190,14 +190,14 @@
 
             $(document).on('click', '#track-list li ', function(){  
               var linkTrack = $(this).attr('linkPlayer');
-              SC.oEmbed(linkTrack, {auto_play: false,show_comments:false,show_artwork:true,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
+              SC.oEmbed(linkTrack, {auto_play: true,show_comments:false,show_artwork:true,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
               if (oEmbed) $('#player').html(oEmbed.html.replace('visual=true&',''));
 
 
             });
             $(document).on('click', '#likes-list li ', function(){  
               var linkTrack = $(this).attr('linkPlayer');
-              SC.oEmbed(linkTrack, {auto_play: false,show_comments:false,show_artwork:true,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
+              SC.oEmbed(linkTrack, {auto_play: true,show_comments:false,show_artwork:true,liking:false,buying:false,sharing:false,maxheight:100}, $(".player").get(0));
                             if (oEmbed) $('#player').html(oEmbed.html.replace('visual=true&',''));
 
             });

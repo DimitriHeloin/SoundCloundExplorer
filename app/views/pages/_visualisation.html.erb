@@ -100,12 +100,12 @@ $("#tabsWithStyle").tabs();
   $(window).resize(function(){
     $height=$(window).height();
     $width=$(window).width();
-    $("#viewWindow").height($height-100);
+    $("#viewWindow").height($height-150);
     $("#viewWindow").width($width);
     var viewerWidth = $("#tree-container").width();
     var viewerHeight = $("#tree-container").height();
-    $("#zoneAffichageTree").height($height-100);
-    $("#zoneAffichageTree").width($width-100);
+    $("#zoneAffichageTree").height($height-150);
+    $("#zoneAffichageTree").width($width);
 
   });
   $body = $("body");
@@ -262,7 +262,7 @@ $("#tabsWithStyle").tabs();
 
   $height=$(window).height();
   $width=$(window).width();
-  $("#viewWindow").height($height-100);
+  $("#viewWindow").height($height-150);
   $("#viewWindow").width($width);
   var viewerWidth = $("#tree-container").width();
   var viewerHeight = $("#tree-container").height();
@@ -457,7 +457,6 @@ if($(this).html()=="Following")
                                 var short_likecount=long_likecount;
                                 var thousands=0;
                                 var hundreds=0;
-                                cons
                                 if(long_playcount>1000)
                                 {
                                   thousands=Math.floor(long_playcount/1000);
@@ -643,14 +642,12 @@ error: function() { console.log("fail") }
       
       $premierClicDivNotificationFait=true;
     }    
-    else
-    {
+    
       if($DivNotificationOuvert==false)
       {
         $DivNotificationOuvert=true;
 
         $("#show_notifications").css("display","block");
-        $("#list_notifications").empty();
 
       }
       else
@@ -659,6 +656,6 @@ error: function() { console.log("fail") }
         $DivNotificationOuvert=false;
 
       }
-    }
+    
   });
 </script>

@@ -52,7 +52,7 @@ class FriendshipsController < ApplicationController
         if @friendship.save
           @notif = Notification.new
           @notif.user_id=User.where(uid: params[:friend_id]).take.id
-          @notif.content="L'utilisateur vous a ajouté en ami"
+          @notif.content="L'utilisateur <a href='javascript:void(0)' id='"+current_user.uid.to_s+"' onclick='changeRoot(this.id);'> "+current_user.username+" </a> vous a ajouté en ami"
           User.where(uid: params[:friend_id]).take.notifications << @notif
           respond_to do |format|
           format.html # show.html.erb
