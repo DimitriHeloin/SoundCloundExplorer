@@ -27,9 +27,9 @@
         <ul id="mytabs">
           <li><a href="#tracks"><div class="icon tracks-icon">Tracks</div></a></li>
           <li><a href="#likes"><div class="icon likes-icon">Likes</div></a></li>
-          <li><a href="#playlists"><div class="icon playlists-icon">Playlists</div></a></li>
-          <li><a href="#user-friends"><div class="icon user-friends-icon">Friends</div></a></li>
-          <li class="tabFriends"><a href="#my-friends"><div class="icon my-friends-icon">My Friends</div></a></li>
+<!--           <li><a href="#playlists"><div class="icon playlists-icon">Playlists</div></a></li>
+ --><!--           <li><a href="#user-friends"><div class="icon user-friends-icon">Friends</div></a></li>
+ -->          <li class="tabFriends"><a href="#my-friends"><div class="icon my-friends-icon">My Friends</div></a></li>
         </ul>
         <div id="tracks">
           <ul data-role="listview"  id="track-list" data-theme="a">
@@ -37,12 +37,12 @@
           <div id="likes">
             <ul data-role="listview"  id="likes-list" data-theme="a">
             </div>
-            <div id="playlists">
+<!--             <div id="playlists">
               <ul data-role="listview"  id="playlists-list" data-theme="a">
               </div>
-              <div id="user-friends">
+ --><!--               <div id="user-friends">
                 <ul data-role="listview"  id="user-friends-list" data-theme="a">
-                </div>
+                </div> -->
                 <div id="my-friends">
                   <ul data-role="listview"  id="my-friends-list" data-theme="a">
                   </div>
@@ -417,8 +417,8 @@ if($(this).html()=="Following")
                                       {
                                         alert("ami ajouté")
                                       }
-                                      else
-                                        alert("l'utilisateur n'est pas inscrit sur soundcloud explorer, parlez lui de l'application pour qu'il s'inscrive blablabla")
+                                      else if(data.result==false)
+                                        alert("l'utilisateur n'est pas inscrit sur soundcloud explorer, n'hésitez pas à lui parler de l'application pour qu'il s'y inscrive!");
                                     },
                                     error: function() {
                                     }
@@ -562,7 +562,7 @@ if($(this).html()=="Following")
                                       $donneesfriends=data;
                                       for(var index=0;index<data["children"].length;index++)
                                       {
-                                        // $arrayvaleurmyfriends.push(data["children"][index]["friend_id"]);
+                                        $arrayvaleurmyfriends.push(data["children"][index]["friend_id"]);
                                         $.ajax({
                                           url:"/users/show/"+data["children"][index].friend_id,
                                           type :"GET",

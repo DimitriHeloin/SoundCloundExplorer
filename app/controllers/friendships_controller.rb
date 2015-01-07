@@ -41,9 +41,8 @@ class FriendshipsController < ApplicationController
     if @user.length==1
 
       current_user.friends.each do |t|
-        if t.uid==params[:friend_id]
+        if t.uid==User.where(uid: params[:friend_id]).take.uid
           @test_deja_ami=true;
-        else
         end
       end
       if @test_deja_ami==false
@@ -57,10 +56,10 @@ class FriendshipsController < ApplicationController
           respond_to do |format|
           format.html # show.html.erb
           format.json  { render :json => {result:true} }    end
-          # flash[:notice]="Added friend."
+          flash[:notice]="Added friend."
           # redirect_to root_url
         else
-          # flash[:notice]="Unable to add friend."
+           flash[:notice]="Unable to add friend."
           # redirect_to root_url
         end
       end
@@ -68,6 +67,7 @@ class FriendshipsController < ApplicationController
     else
       respond_to do |format|
       format.html # show.html.erb
+      flash[:notice]="Unable to add friend."
       format.json  { render :json => {result:false} }    end
     end
   end
